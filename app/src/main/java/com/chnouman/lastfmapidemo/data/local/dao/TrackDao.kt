@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
-import com.chnouman.cleancode.data.local.entities.Track
+import com.chnouman.lastfmapidemo.data.local.entities.Track
 
 @Dao
 interface TrackDao {

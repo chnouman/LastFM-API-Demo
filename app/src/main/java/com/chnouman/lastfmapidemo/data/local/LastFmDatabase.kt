@@ -2,7 +2,7 @@ package com.chnouman.lastfmapidemo.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.chnouman.cleancode.data.local.entities.Track
+import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
 import com.chnouman.lastfmapidemo.data.local.dao.ArtistDao
 import com.chnouman.lastfmapidemo.data.local.dao.TrackDao

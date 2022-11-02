@@ -1,4 +1,4 @@
-package com.chnouman.cleancode.data.local.entities
+package com.chnouman.lastfmapidemo.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

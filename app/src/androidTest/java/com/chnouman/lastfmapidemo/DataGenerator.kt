@@ -1,6 +1,6 @@
 package com.chnouman.lastfmapidemo
 
-import com.chnouman.cleancode.data.local.entities.Track
+import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import kotlin.random.Random
