@@ -2,7 +2,7 @@ package com.chnouman.lastfmapidemo.di
 
 import android.app.Application
 import androidx.room.Room
-import com.chnouman.lastfmapidemo.Constants
+import com.chnouman.lastfmapidemo.core.util.Constants
 import com.chnouman.lastfmapidemo.data.local.LastFmDatabase
 import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
 import com.chnouman.lastfmapidemo.data.local.dao.ArtistDao
