@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.chnouman.lastfmapidemo.core.util.extensions.hide
 import com.chnouman.lastfmapidemo.core.util.extensions.show
-import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.databinding.FragmentMainBinding
 import com.chnouman.lastfmapidemo.presentation.topalbum.adapter.TopAlbumListAdapter
 import com.chnouman.lastfmapidemo.presentation.topalbum.viewmodel.TopAlbumViewModel
@@ -32,19 +31,26 @@ class TopAlbumFragment : Fragment() {
                     it
                 )
             )
-        }, {
+        }, { album, position ->
             //delete action
-            Toast.makeText(requireContext(), "item deleted", Toast.LENGTH_SHORT).show()
-            viewModel.deleteAlbum(it)
-        }, {
+            viewModel.deleteAlbum(album, position)
+        }, { album, position ->
             //save action
-            Toast.makeText(requireContext(), "item Saved", Toast.LENGTH_SHORT).show()
-            viewModel.saveAlbum(adapter.currentList.toMutableList(),it, args.artist)
+            viewModel.saveAlbum(position, album, args.artist)
         })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.albumsRecyclerView?.adapter = adapter
         lifecycleScope.launch {
             viewModel.eventFlow.collectLatest { event ->
                 when (event) {
@@ -54,11 +60,13 @@ class TopAlbumFragment : Fragment() {
                     }
                     is TopAlbumViewModel.UIEvent.Success -> {
                         binding?.progressIndicator?.hide()
-                        event.artists?.let { setupAdapter(it) }
+                        event.artists?.let { adapter.submitList(it) }
                     }
                     is TopAlbumViewModel.UIEvent.ItemSaved -> {
-                        binding?.progressIndicator?.hide()
-                        updateAdapter(event.artists)
+                        updateItem(event.position)
+                    }
+                    is TopAlbumViewModel.UIEvent.ItemDeleted -> {
+                        updateItem(event.position)
                     }
                     is TopAlbumViewModel.UIEvent.Error -> {
                         binding?.progressIndicator?.hide()
@@ -72,40 +80,12 @@ class TopAlbumFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.albumsRecyclerView?.adapter = adapter
         viewModel.getTopAlbums(args.artist.name)
     }
 
-    private fun setupAdapter(artists: MutableList<Album>) {
-        adapter.submitList(artists)
-    }
-
-    private fun updateAdapter(albumsDto: Album) {
-        adapter.submitList(viewModel.currentItems.toList().toMutableList().let {
-            it.forEach {
-                if (it.name == albumsDto.name){
-                    it.copy(isDownloaded = true)
-                }
-            }
-/*            it[index] = it[index].copy(property = newvalue) // To update a property on an item
-            it.add(newItem) // To add a new item
-            it.removeAt[index] // To remove an item*/
-            // and so on....
-            it
-        })
+    private fun updateItem(position: Int) {
+        binding?.progressIndicator?.hide()
+        adapter.notifyItemChanged(position)
     }
 
     override fun onDestroyView() {

@@ -35,7 +35,6 @@ class TopAlbumViewModel @Inject constructor(
 
     private val _eventFlow = MutableSharedFlow<UIEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
-    var currentItems = mutableListOf<Album>()
 
     fun getTopAlbums(artist: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -45,7 +44,6 @@ class TopAlbumViewModel @Inject constructor(
                         is Resource.Success -> {
                             result.data?.let {
                                 val compareLocalAlbums1 = compareLocalAlbums(it)
-                                currentItems = compareLocalAlbums1
                                 _eventFlow.emit(UIEvent.Success(compareLocalAlbums1))
                                 Log.d("MainViewModelTest", "search: success ${result.data.size}")
                             }
@@ -67,7 +65,7 @@ class TopAlbumViewModel @Inject constructor(
         }
     }
 
-    fun saveAlbum(list: MutableList<Album>, albumsDto: Album, artist: Artist) {
+    fun saveAlbum(position: Int, albumsDto: Album, artist: Artist) {
         viewModelScope.launch(Dispatchers.IO) {
             //load the album detail
             val tracks = getAlbumInfo(artist.name, albumsDto.name)
@@ -81,27 +79,33 @@ class TopAlbumViewModel @Inject constructor(
             job1.join()
             job2.join()
             job3.join()
-            Log.d("saveAlbum", "saveAlbum: ")
-            //TODO fix this updation part
-            _eventFlow.emit(UIEvent.ItemSaved(albumsDto))
 
+            albumsDto.isDownloaded = true
+            _eventFlow.emit(UIEvent.ItemSaved(position))
         }
     }
 
-    fun deleteAlbum(albumsDto: Album) {
+    fun deleteAlbum(albumsDto: Album, position: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            launch { deleteTracks(albumsDto.name) }
-            launch {
+            val job1 = launch {
+                deleteTracks(albumsDto.name)
+            }
+            val job2 = launch {
                 deleteAlbumUseCase(albumsDto)
                 deleteArtist(albumsDto.artistName)
             }
+            job1.join()
+            job2.join()
+            albumsDto.isDownloaded = false
+            _eventFlow.emit(UIEvent.ItemDeleted(position))
         }
     }
 
     sealed class UIEvent {
         object Loading : UIEvent()
-        data class Success(val artists: MutableList<Album>?) : UIEvent()
-        data class ItemSaved(val artists: Album) : UIEvent()
+        data class Success(val artists: List<Album>?) : UIEvent()
+        data class ItemSaved(val position: Int) : UIEvent()
+        data class ItemDeleted(val position: Int) : UIEvent()
         data class Error(val message: String) : UIEvent()
     }
 }

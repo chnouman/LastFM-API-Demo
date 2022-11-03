@@ -11,31 +11,29 @@ import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
 
 class TopAlbumListAdapter(
     private var itemClick: (Album) -> Unit,
-    private var deleteItemClick: (Album) -> Unit,
-    private var saveItemClick: (Album) -> Unit,
+    private var deleteItemClick: (Album, Int) -> Unit,
+    private var saveItemClick: (Album, Int) -> Unit,
 ) : androidx.recyclerview.widget.ListAdapter<Album, TopAlbumListAdapter.AlbumViewHolder>(
     AlbumDiffUtils()
 ) {
 
     inner class AlbumViewHolder(private val binding: ItemAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(albumsDto: Album) {
-            this.apply {
-                binding.artistTextView.text = albumsDto.name
-                binding.nameTextView.text = albumsDto.name
+        fun bind(albumsDto: Album, position: Int) {
+            binding.apply {
+                artistTextView.text = albumsDto.name
+                nameTextView.text = albumsDto.name
                 if (albumsDto.isDownloaded) {
-                    binding.deleteButton.show()
-                    binding.saveButton.hide()
+                    deleteButton.show()
+                    saveButton.hide()
                 } else {
-                    binding.deleteButton.hide()
-                    binding.saveButton.show()
+                    deleteButton.hide()
+                    saveButton.show()
                 }
-                binding.saveButton.setOnClickListener { saveItemClick.invoke(albumsDto) }
-                binding.deleteButton.setOnClickListener { deleteItemClick.invoke(albumsDto) }
-                itemView.apply {
-                    setOnClickListener {
-                        itemClick.invoke(albumsDto)
-                    }
+                saveButton.setOnClickListener { saveItemClick.invoke(albumsDto, position) }
+                deleteButton.setOnClickListener { deleteItemClick.invoke(albumsDto, position) }
+                itemView.setOnClickListener {
+                    itemClick.invoke(albumsDto)
                 }
             }
         }
@@ -52,19 +50,17 @@ class TopAlbumListAdapter(
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
-
 
     class AlbumDiffUtils : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.isDownloaded == newItem.isDownloaded
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.isDownloaded == newItem.isDownloaded
+            return oldItem.name == newItem.name && oldItem.isDownloaded == newItem.isDownloaded
         }
-
     }
 }
 
