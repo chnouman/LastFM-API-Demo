@@ -1,6 +1,8 @@
 package com.chnouman.lastfmapidemo.di
 
 import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
+import com.chnouman.lastfmapidemo.data.local.dao.ArtistDao
+import com.chnouman.lastfmapidemo.data.local.dao.TrackDao
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
 import com.chnouman.lastfmapidemo.data.repository.MainRepositoryImpl
 import com.chnouman.lastfmapidemo.data.repository.SearchRepositoryImpl
@@ -40,7 +42,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTopAlbumRepository(): TopAlbumRepository {
-        return TopAlbumRepositoryImpl()
+    fun provideTopAlbumRepository(
+        api: LastFMApi,
+        albumsDao: AlbumDao,
+        trackDao: TrackDao,
+        artistDao: ArtistDao
+    ): TopAlbumRepository {
+        return TopAlbumRepositoryImpl(api, albumsDao, trackDao, artistDao)
     }
 }
