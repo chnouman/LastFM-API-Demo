@@ -1,17 +1,13 @@
-package com.chnouman.lastfmapidemo.domain
+package com.chnouman.lastfmapidemo.domain.repository
 
-import androidx.paging.PagingSource
 import com.chnouman.lastfmapidemo.core.util.Resource
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Track
-import com.chnouman.lastfmapidemo.data.remote.models.searchartist.Artist
 import kotlinx.coroutines.flow.Flow
 
-interface Repository {
-    fun searchArtist(query: String, apiKey: String): Flow<Resource<MutableList<Artist>>>
+interface TopAlbumRepository {
     fun getTopAlbums(query: String, apiKey: String): Flow<Resource<MutableList<Album>>>
     fun getAlbumInfo(artist: String, album: String, apiKey: String): Flow<Resource<Track>>
-    fun getLocalAlbums(): PagingSource<Int, Album>
     fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album>
     fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>>
     fun addAlbumDto(albumsDto: Album)
