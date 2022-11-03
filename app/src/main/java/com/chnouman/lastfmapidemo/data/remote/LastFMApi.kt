@@ -1,7 +1,8 @@
 package com.chnouman.lastfmapidemo.data.remote
 
-import com.chnouman.lastfmapidemo.data.remote.models.getalbuminfo.GetAlbumInfo
-import com.chnouman.lastfmapidemo.data.remote.models.searchartist.ArtistsSearchResponse
+import com.chnouman.lastfmapidemo.data.remote.models.GetAlbumInfo
+import com.chnouman.lastfmapidemo.data.remote.models.ArtistsSearchResponse
+import com.chnouman.lastfmapidemo.data.remote.models.GetTopAlbums
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -25,7 +26,7 @@ interface LastFMApi {
     suspend fun getTopAlbums(
         @Query("artist") artistQuery: String,
         @Query("api_key") apiKey: String
-    ): com.chnouman.lastfmapidemo.data.remote.models.gettopalbums.GetTopAlbums
+    ): GetTopAlbums
 
     @GET("?method=album.getinfo&format=json")
     suspend fun getAlbumInfo(
@@ -33,8 +34,4 @@ interface LastFMApi {
         @Query("album") album: String,
         @Query("api_key") apiKey: String
     ): GetAlbumInfo
-
-    companion object {
-        const val BASE_URL = "https://ws.audioscrobbler.com/2.0/"
-    }
 }

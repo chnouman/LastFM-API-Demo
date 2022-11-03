@@ -1,8 +1,8 @@
 package com.chnouman.lastfmapidemo.data.remote.deserializer
 
-import com.chnouman.lastfmapidemo.data.remote.models.getalbuminfo.Track
+import com.chnouman.lastfmapidemo.data.remote.models.Track
 import com.google.gson.JsonDeserializer
-import com.chnouman.lastfmapidemo.data.remote.models.getalbuminfo.Tracks
+import com.chnouman.lastfmapidemo.data.remote.models.Tracks
 import kotlin.Throws
 import com.google.gson.JsonParseException
 import com.google.gson.JsonElement
