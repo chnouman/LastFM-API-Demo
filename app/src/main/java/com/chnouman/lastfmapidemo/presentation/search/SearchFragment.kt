@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +19,7 @@ import com.chnouman.lastfmapidemo.presentation.search.adapter.ArtistListAdapter
 import com.chnouman.lastfmapidemo.presentation.search.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -45,6 +48,13 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.artistsRecyclerView?.adapter = adapter.withLoadStateFooter(MainLoadStateAdapter())
+        binding?.searchEditText?.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                binding?.searchButton?.performClick()
+                return@OnEditorActionListener true
+            }
+            false
+        })
         adapter.addLoadStateListener { loadState ->
             if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
                 binding?.artistsRecyclerView?.hide()
