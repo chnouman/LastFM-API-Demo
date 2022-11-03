@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.chnouman.lastfmapidemo.core.util.extensions.hide
 import com.chnouman.lastfmapidemo.core.util.extensions.show
@@ -24,6 +25,11 @@ class SearchFragment : Fragment() {
 
     private val adapter: ArtistListAdapter by lazy {
         ArtistListAdapter {
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToTopAlbumFragment(
+                    it
+                )
+            )
         }
     }
 

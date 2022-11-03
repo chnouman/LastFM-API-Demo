@@ -5,9 +5,9 @@ import com.chnouman.lastfmapidemo.domain.usecases.track.DeleteTracks
 import com.chnouman.lastfmapidemo.domain.repository.MainRepository
 import com.chnouman.lastfmapidemo.domain.repository.SearchRepository
 import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
-import com.chnouman.lastfmapidemo.domain.usecases.GetAlbumInfo
-import com.chnouman.lastfmapidemo.domain.usecases.GetLocalAlbums
-import com.chnouman.lastfmapidemo.domain.usecases.SearchArtist
+import com.chnouman.lastfmapidemo.domain.usecases.*
+import com.chnouman.lastfmapidemo.domain.usecases.artist.AddArtist
+import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
 import com.chnouman.lastfmapidemo.domain.usecases.track.GetLocalTracks
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object UseCasesModule {
     //Start Region UseCase dependencies
-
     @Provides
     @Singleton
     fun provideGetAlbums(repository: MainRepository): GetLocalAlbums {
@@ -32,7 +31,6 @@ object UseCasesModule {
     fun provideSearchArtistUseCase(repository: SearchRepository): SearchArtist {
         return SearchArtist(repository)
     }
-
 
     @Provides
     @Singleton
@@ -58,5 +56,40 @@ object UseCasesModule {
         return GetAlbumInfo(repository)
     }
 
+    @Provides
+    @Singleton
+    fun provideAddAlbum(repository: TopAlbumRepository): AddAlbum {
+        return AddAlbum(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetTopAlbums(repository: TopAlbumRepository): GetTopAlbums {
+        return GetTopAlbums(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteAlbum(repository: TopAlbumRepository): DeleteAlbum {
+        return DeleteAlbum(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddArtist(repository: TopAlbumRepository): AddArtist {
+        return AddArtist(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompareLocalAlbums(repository: TopAlbumRepository): CompareLocalAlbums {
+        return CompareLocalAlbums(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteArtist(repository: TopAlbumRepository): DeleteArtist {
+        return DeleteArtist(repository)
+    }
     //End region UseCase dependencies
 }

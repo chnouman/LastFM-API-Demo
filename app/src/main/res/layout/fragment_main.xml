@@ -23,7 +23,7 @@
         android:layout_margin="16dp"
         android:text="@string/none_of_the_album_is_stored"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
