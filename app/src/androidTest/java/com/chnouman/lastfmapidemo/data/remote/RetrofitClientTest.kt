@@ -1,6 +1,6 @@
 package com.chnouman.lastfmapidemo.data.remote
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.BuildConfig
@@ -75,7 +75,7 @@ class RetrofitClientTest {
     @Test
     fun getAlbumInfo_Success() = runTest {
         //Execute the API call
-        val response = lastFMApi?.getAlbumInfo("Justin","Cominum", BuildConfig.API_KEY)
+        val response = lastFMApi?.getAlbumInfo("John Mayer","Heavier Things", BuildConfig.API_KEY)
         assert(response != null)
         assertThat(response?.album?.tracks?.tracks?.size).isGreaterThan(0)
     }
