@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LastFM Api Demo</string>
+    <string name="search">Search</string>
+    <string name="none_of_the_album_is_stored">None of the Album is stored</string>
+    <string name="search_artist">Search Artist…</string>
+    <string name="no_result_found">No Results found</string>
+    <string name="save">Save Album</string>
+    <string name="delete">Delete Album</string>
 </resources>
