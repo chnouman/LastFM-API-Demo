@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TopAlbumRepository {
     fun getTopAlbums(query: String, apiKey: String): Flow<Resource<MutableList<Album>>>
-    fun getAlbumInfo(artist: String, album: String, apiKey: String): Flow<Resource<Track>>
+    fun getAlbumInfo(artist: String, album: String, apiKey: String): Flow<Resource<MutableList<Track>>>
     fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album>
     fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>>
     fun addAlbumDto(albumsDto: Album)

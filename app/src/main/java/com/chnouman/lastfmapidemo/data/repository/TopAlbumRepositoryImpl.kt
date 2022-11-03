@@ -16,7 +16,7 @@ class TopAlbumRepositoryImpl : TopAlbumRepository {
         artist: String,
         album: String,
         apiKey: String
-    ): Flow<Resource<Track>> {
+    ): Flow<Resource<MutableList<Track>>> {
         TODO("Not yet implemented")
     }
 
