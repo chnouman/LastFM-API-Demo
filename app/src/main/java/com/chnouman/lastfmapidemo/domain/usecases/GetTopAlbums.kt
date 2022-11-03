@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 
 class GetTopAlbums(private val repository: TopAlbumRepository) {
 
-    operator fun invoke(word: String): Flow<Resource<MutableList<Album>>> {
+    suspend operator fun invoke(word: String): Flow<Resource<MutableList<Album>>> {
         return if (word.isEmpty()) {
             flow { }
         } else {

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 
 class SearchArtist(private val repository: SearchRepository) {
 
-    operator fun invoke(word: String): Flow<Resource<MutableList<Artist>>> {
+    suspend operator fun invoke(word: String): Flow<Resource<MutableList<Artist>>> {
         return if (word.isEmpty()) {
             flow { }
         } else {

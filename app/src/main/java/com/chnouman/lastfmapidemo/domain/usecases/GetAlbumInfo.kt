@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetAlbumInfo(private val repository: TopAlbumRepository) {
 
-    operator fun invoke(artist: String, album: String): Flow<Resource<MutableList<Track>>> {
+    suspend operator fun invoke(artist: String, album: String): Flow<Resource<MutableList<Track>>> {
         return repository.getAlbumInfo(artist, album, BuildConfig.API_KEY)
     }
 }

@@ -6,7 +6,7 @@ import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetLocalTracks(private val repository: TopAlbumRepository) {
-    operator fun invoke(albumName: String): Flow<Resource<MutableList<Track>>> {
+    suspend operator fun invoke(albumName: String): Flow<Resource<MutableList<Track>>> {
         return repository.getLocalTracks(albumName)
     }
 }

@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class SearchRepositoryImpl(private val api: LastFMApi) : SearchRepository {
-    override fun searchArtist(
+    override suspend fun searchArtist(
         query: String,
         apiKey: String
     ): Flow<Resource<MutableList<Artist>>> =

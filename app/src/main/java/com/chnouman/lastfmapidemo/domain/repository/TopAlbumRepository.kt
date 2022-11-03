@@ -6,14 +6,19 @@ import com.chnouman.lastfmapidemo.data.local.entities.Track
 import kotlinx.coroutines.flow.Flow
 
 interface TopAlbumRepository {
-    fun getTopAlbums(query: String, apiKey: String): Flow<Resource<MutableList<Album>>>
-    fun getAlbumInfo(artist: String, album: String, apiKey: String): Flow<Resource<MutableList<Track>>>
-    fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album>
-    fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>>
-    fun addAlbumDto(albumsDto: Album)
-    fun addTracks(tracks: MutableList<Track>)
-    fun addArtist(artist: com.chnouman.lastfmapidemo.data.local.entities.Artist)
-    fun deleteAlbum(albumsDto: Album)
-    fun deleteTracks(albumsName: String)
-    fun deleteArtist(artist: String)
+    suspend fun getTopAlbums(query: String, apiKey: String): Flow<Resource<MutableList<Album>>>
+    suspend fun getAlbumInfo(
+        artist: String,
+        album: String,
+        apiKey: String
+    ): Flow<Resource<MutableList<Track>>>
+
+    suspend fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album>
+    suspend fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>>
+    suspend fun addAlbumDto(albumsDto: Album)
+    suspend fun addTracks(tracks: MutableList<Track>)
+    suspend fun addArtist(artist: com.chnouman.lastfmapidemo.data.local.entities.Artist)
+    suspend fun deleteAlbum(albumsDto: Album)
+    suspend fun deleteTracks(albumsName: String)
+    suspend fun deleteArtist(artist: String)
 }

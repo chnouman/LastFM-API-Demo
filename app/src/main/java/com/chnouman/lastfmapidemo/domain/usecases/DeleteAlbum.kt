@@ -5,7 +5,7 @@ import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
 
 
 class DeleteAlbum(private val repository: TopAlbumRepository) {
-    operator fun invoke(albumsDto: Album) {
+    suspend operator fun invoke(albumsDto: Album) {
         return repository.deleteAlbum(albumsDto)
     }
 }

@@ -5,7 +5,7 @@ import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
 
 
 class CompareLocalAlbums(private val repository: TopAlbumRepository) {
-    operator fun invoke(albums: MutableList<Album>): MutableList<Album> {
+    suspend operator fun invoke(albums: MutableList<Album>): MutableList<Album> {
         return repository.compareLocalAlbums(albums)
     }
 }
