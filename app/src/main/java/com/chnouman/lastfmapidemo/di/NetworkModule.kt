@@ -1,9 +1,8 @@
 package com.chnouman.lastfmapidemo.di
 
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
-import com.chnouman.lastfmapidemo.data.remote.LastFMApi.Companion.BASE_URL
 import com.chnouman.lastfmapidemo.data.remote.deserializer.TracksDeserializer
-import com.chnouman.lastfmapidemo.data.remote.models.getalbuminfo.Tracks
+import com.chnouman.lastfmapidemo.data.remote.models.Tracks
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -44,4 +43,7 @@ object NetworkModule {
         return GsonBuilder().registerTypeAdapter(Tracks::class.java, TracksDeserializer())
             .create()
     }
+
+    const val BASE_URL = "https://ws.audioscrobbler.com/2.0/"
+
 }

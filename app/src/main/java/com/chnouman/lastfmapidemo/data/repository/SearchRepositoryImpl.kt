@@ -18,10 +18,10 @@ class SearchRepositoryImpl(private val api: LastFMApi) : SearchRepository {
             emit(Resource.Loading())
             try {
                 val albumsFromRemote = api.searchArtist(query, apiKey)
-                val artists = albumsFromRemote.results.artistmatches.artist
+                val artists = albumsFromRemote.results?.artistmatches?.artist
                 val artistLocal = mutableListOf<Artist>()
-                artists.forEach {
-                    artistLocal.add(Artist(it.name, it.url))
+                artists?.forEach {
+                    artistLocal.add(Artist(it.name ?: "", it.url ?: ""))
                 }
                 emit(Resource.Success(artistLocal))
             } catch (e: HttpException) {

@@ -4,6 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.BuildConfig
+import com.chnouman.lastfmapidemo.di.NetworkModule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -35,7 +36,7 @@ class RetrofitClientTest {
     @Test
     fun retrofit_InstanceBaseUrl() {
         //Assert that, Retrofit's base url matches to our BASE_URL
-        assert(instance?.baseUrl().toString() == LastFMApi.BASE_URL)
+        assert(instance?.baseUrl().toString() == NetworkModule.BASE_URL)
     }
 
     @Test

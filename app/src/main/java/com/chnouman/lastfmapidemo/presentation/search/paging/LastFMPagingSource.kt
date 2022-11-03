@@ -18,10 +18,10 @@ class LastFMPagingSource(
         return try {
             val currentPage = params.key ?: 1
             val response = lastFMApi.searchArtistPaged(artistQuery, apiKey, currentPage, 10)
-            val data = response.results.artistmatches.artist
+            val data = response.results?.artistmatches?.artist
             val mutableList = mutableListOf<Artist>()
-            data.forEach {
-                mutableList.add(Artist(it.name, it.url))
+            data?.forEach {
+                mutableList.add(Artist(it.name?:"", it.url?:""))
             }
             if (mutableList.isEmpty()) {
                 LoadResult.Error(Throwable("No more items"))//TODO fix the empty list case and stop paging
