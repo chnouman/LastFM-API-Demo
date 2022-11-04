@@ -20,20 +20,20 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAlbumDao(wordDatabase: LastFmDatabase): AlbumDao {
-        return wordDatabase.getAlbumDao()
+    fun provideAlbumDao(lastFmDatabase: LastFmDatabase): AlbumDao {
+        return lastFmDatabase.albumDao
     }
 
     @Provides
     @Singleton
     fun provideTrackDao(wordDatabase: LastFmDatabase): TrackDao {
-        return wordDatabase.getTrackDao()
+        return wordDatabase.trackDao
     }
 
     @Provides
     @Singleton
     fun provideArtistDao(wordDatabase: LastFmDatabase): ArtistDao {
-        return wordDatabase.getArtistDao()
+        return wordDatabase.artisDao
     }
 
     @Provides

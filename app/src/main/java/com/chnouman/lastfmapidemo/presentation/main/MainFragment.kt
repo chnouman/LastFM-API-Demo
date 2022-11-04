@@ -61,12 +61,30 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     private fun manageLoadingState(loadState: CombinedLoadStates) {
         viewDataBinding?.apply {
-            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
-                albumsRecyclerView.hide()
-                emptyTextView.show()
-            } else {
-                albumsRecyclerView.show()
-                emptyTextView.hide()
+            when {
+                loadState.refresh is LoadState.Loading -> {
+                    // Show first time loading UI
+                    albumsRecyclerView.show()
+                    emptyTextView.hide()
+                }
+
+                loadState.append is LoadState.Loading -> {
+                    // Show little loading UI as we already have some items and we're loading
+                }
+
+                loadState.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1 -> {
+                    // Show empty UI as there's no data available
+                    albumsRecyclerView.hide()
+                    emptyTextView.show()
+                }
+
+                loadState.refresh is LoadState.Error -> {
+                    // Failed to load data in first try
+                }
+
+                loadState.append is LoadState.Error -> {
+                    // Failed to load data while appending to existing items
+                }
             }
         }
     }

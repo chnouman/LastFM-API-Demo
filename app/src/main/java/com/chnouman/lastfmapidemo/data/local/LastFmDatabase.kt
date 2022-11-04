@@ -15,7 +15,7 @@ import com.chnouman.lastfmapidemo.data.local.entities.Artist
     exportSchema = false
 )
 abstract class LastFmDatabase : RoomDatabase() {
-    abstract fun getAlbumDao(): AlbumDao
-    abstract fun getTrackDao(): TrackDao
-    abstract fun getArtistDao(): ArtistDao
+    abstract val albumDao: AlbumDao
+    abstract val trackDao: TrackDao
+    abstract val artisDao: ArtistDao
 }
