@@ -2,13 +2,12 @@
 
 package com.chnouman.lastfmapidemo.data.local
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.SmallTest
 import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.DataGenerator
-import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
 import com.chnouman.lastfmapidemo.data.local.dao.TrackDao
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi

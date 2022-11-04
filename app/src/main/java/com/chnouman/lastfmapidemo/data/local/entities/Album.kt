@@ -10,15 +10,15 @@ import kotlinx.parcelize.Parcelize
 data class  Album @JvmOverloads constructor(
     @PrimaryKey(autoGenerate = false)
     @SerializedName("name")
-    val name: String,
+    var name: String,
     @SerializedName("playcount")
-    val playCount: Int,
+    var playCount: Int,
     @SerializedName("url")
-    val url: String,
+    var url: String,
     @SerializedName("image")
-    val image: String,
+    var image: String,
     @SerializedName("artistName")
-    val artistName: String,
+    var artistName: String,
     @Ignore
     var isDownloaded:Boolean = false
 ) : Parcelable

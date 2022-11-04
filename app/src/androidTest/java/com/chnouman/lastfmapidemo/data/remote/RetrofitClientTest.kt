@@ -1,9 +1,10 @@
 package com.chnouman.lastfmapidemo.data.remote
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.BuildConfig
+import com.chnouman.lastfmapidemo.di.NetworkModule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -35,7 +36,7 @@ class RetrofitClientTest {
     @Test
     fun retrofit_InstanceBaseUrl() {
         //Assert that, Retrofit's base url matches to our BASE_URL
-        assert(instance?.baseUrl().toString() == LastFMApi.BASE_URL)
+        assert(instance?.baseUrl().toString() == NetworkModule.BASE_URL)
     }
 
     @Test
@@ -74,7 +75,7 @@ class RetrofitClientTest {
     @Test
     fun getAlbumInfo_Success() = runTest {
         //Execute the API call
-        val response = lastFMApi?.getAlbumInfo("Justin","Cominum", BuildConfig.API_KEY)
+        val response = lastFMApi?.getAlbumInfo("John Mayer","Heavier Things", BuildConfig.API_KEY)
         assert(response != null)
         assertThat(response?.album?.tracks?.tracks?.size).isGreaterThan(0)
     }

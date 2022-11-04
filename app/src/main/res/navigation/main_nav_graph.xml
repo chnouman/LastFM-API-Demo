@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph.xml"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.chnouman.lastfmapidemo.presentation.main.MainFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.chnouman.lastfmapidemo.presentation.search.SearchFragment"
+        android:label="Search Artists"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_topAlbumFragment"
+            app:destination="@id/topAlbumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.chnouman.lastfmapidemo.presentation.detail.DetailFragment"
+        android:label="Album Detail"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="album"
+            app:argType="com.chnouman.lastfmapidemo.data.local.entities.Album" />
+    </fragment>
+    <fragment
+        android:id="@+id/topAlbumFragment"
+        android:name="com.chnouman.lastfmapidemo.presentation.topalbum.TopAlbumFragment"
+        android:label="TopAlbumFragment"
+        tools:layout="@layout/fragment_main">
+        <argument
+            android:name="artist"
+            app:argType="com.chnouman.lastfmapidemo.data.local.entities.Artist" />
+        <action
+            android:id="@+id/action_topAlbumFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+</navigation>
