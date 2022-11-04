@@ -49,7 +49,7 @@ class TrackListAdapter(
         }
     }
 
-    override fun submitList(list: MutableList<Track>?) {
+    override fun submitList(list: List<Track>?) {
         super.submitList(list?.let { ArrayList(it) })
     }
 }

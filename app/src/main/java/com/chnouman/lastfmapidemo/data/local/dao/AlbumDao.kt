@@ -19,7 +19,7 @@ interface AlbumDao {
     fun delete(name: String)
 
     @Query("Select * from albums_table")
-    fun getAll(): MutableList<Album>
+    fun getAll(): List<Album>
 
     @Query("SELECT EXISTS (Select * from albums_table Where name = :name)")
     fun isExist(name: String): Boolean

@@ -13,17 +13,20 @@ class SearchRepositoryImpl(private val api: LastFMApi) : SearchRepository {
     override suspend fun searchArtist(
         query: String,
         apiKey: String
-    ): Flow<Resource<MutableList<Artist>>> =
+    ): Flow<Resource<List<Artist>>> =
         flow {
             emit(Resource.Loading())
             try {
                 val albumsFromRemote = api.searchArtist(query, apiKey)
                 val artists = albumsFromRemote.results?.artistmatches?.artist
-                val artistLocal = mutableListOf<Artist>()
-                artists?.forEach {
-                    artistLocal.add(Artist(it.name ?: "", it.url ?: ""))
+                val artistsLocal = artists?.map {
+                    Artist(it.name ?: "", it.url ?: "")
                 }
-                emit(Resource.Success(artistLocal))
+                if (artistsLocal.isNullOrEmpty()) {
+                    emit(Resource.Error("Nothing Found"))
+                } else {
+                    emit(Resource.Success(artistsLocal))
+                }
             } catch (e: HttpException) {
                 emit(
                     Resource.Error(

@@ -7,7 +7,7 @@ data class ArtistsSearchResponse(
 )
 
 data class ArtistMatches(
-    val artist: MutableList<Artist>?
+    val artist: List<Artist>?
 )
 
 

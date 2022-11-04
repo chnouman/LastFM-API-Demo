@@ -102,7 +102,7 @@ class AlbumDaoTests {
     fun insertAlbumAllScenarioTest() = runTest {
         val album = DataGenerator.getAlbum("ABC")
         val album2 = DataGenerator.getAlbum("ABC2")
-        dao.insertAll(mutableListOf(album,album2))
+        dao.insertAll(listOf(album,album2))
         assertThat(dao.getAll().size).isEqualTo(2)
      }
 

@@ -101,7 +101,7 @@ class TrackDaoTests {
     fun insertTrackAllScenarioTest() = runTest {
         val track = DataGenerator.getTrack("ABC")
         val track2 = DataGenerator.getTrack("ABC2")
-        dao.insertAll(mutableListOf(track, track2))
+        dao.insertAll(listOf(track, track2))
         assertThat(dao.getAll("albumName").size).isEqualTo(2)
     }
 

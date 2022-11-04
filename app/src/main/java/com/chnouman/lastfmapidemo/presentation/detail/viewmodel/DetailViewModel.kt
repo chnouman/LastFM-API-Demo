@@ -56,7 +56,7 @@ class DetailViewModel @Inject constructor(
 
     sealed class UIEvent {
         object Loading : UIEvent()
-        data class Success(val artists: MutableList<Track>?) : UIEvent()
+        data class Success(val artists: List<Track>?) : UIEvent()
         data class Error(val message: String) : UIEvent()
     }
 }

@@ -25,7 +25,7 @@ class TopAlbumRepositoryImpl(
     override suspend fun getTopAlbums(
         query: String,
         apiKey: String
-    ): Flow<Resource<MutableList<Album>>> =
+    ): Flow<Resource<List<Album>>> =
         flow {
             emit(Resource.Loading())
             try {
@@ -38,7 +38,7 @@ class TopAlbumRepositoryImpl(
                         image = it.image?.last()?.text ?: "",
                         artistName = it.artist?.name ?: ""
                     )
-                }?.toMutableList()
+                }
                 emit(Resource.Success(albums))
             } catch (e: HttpException) {
                 emit(
@@ -62,14 +62,14 @@ class TopAlbumRepositoryImpl(
         artist: String,
         album: String,
         apiKey: String
-    ): Flow<Resource<MutableList<Track>>> = flow {
+    ): Flow<Resource<List<Track>>> = flow {
         emit(Resource.Loading())
         try {
             val getAlbumInfo = api.getAlbumInfo(artist, album, apiKey)
             val tracks = getAlbumInfo.album?.tracks
             val tracksLocal = tracks?.tracks?.map {
                 Track(it.name ?: "", it.duration ?: 0, it.url ?: "", album)
-            }?.toMutableList()
+            }
             emit(Resource.Success(tracksLocal))
         } catch (e: HttpException) {
             emit(
@@ -88,7 +88,7 @@ class TopAlbumRepositoryImpl(
         }
     }
 
-    override suspend fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album> {
+    override suspend fun compareLocalAlbums(albums: List<Album>): List<Album> {
         albums.forEach {
             val exist = albumDao.isExist(it.name)
             if (exist) {
@@ -98,11 +98,11 @@ class TopAlbumRepositoryImpl(
         return albums
     }
 
-    override suspend fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>> =
+    override suspend fun getLocalTracks(albumName: String): Flow<Resource<List<Track>>> =
         flow {
             val tracks = trackDao.getAll(albumName)
             if (tracks.isEmpty()) {
-                emit(Resource.Success(mutableListOf()))
+                emit(Resource.Success(listOf()))
             } else {
                 emit(Resource.Success(tracks))
             }
@@ -110,7 +110,7 @@ class TopAlbumRepositoryImpl(
 
     override suspend fun addAlbumDto(albumsDto: Album) = albumDao.insert(albumsDto)
 
-    override suspend fun addTracks(tracks: MutableList<Track>) = trackDao.insertAll(tracks)
+    override suspend fun addTracks(tracks: List<Track>) = trackDao.insertAll(tracks)
 
     override suspend fun addArtist(artist: Artist) = artistDao.insert(artist)
 

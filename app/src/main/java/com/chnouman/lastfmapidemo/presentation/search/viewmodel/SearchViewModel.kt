@@ -46,7 +46,7 @@ class SearchViewModel @Inject constructor(
                                     it.url
                                 )
                             }
-                                ?.toMutableList()))
+                                ))
                         }
                         is Resource.Error -> {
                             result.message?.let { UIEvent.Error(it) }?.let {
@@ -69,7 +69,7 @@ class SearchViewModel @Inject constructor(
 
     sealed class UIEvent {
         object Loading : UIEvent()
-        data class Success(val artists: MutableList<com.chnouman.lastfmapidemo.data.local.entities.Artist>?) :
+        data class Success(val artists: List<com.chnouman.lastfmapidemo.data.local.entities.Artist>?) :
             UIEvent()
 
         data class Error(val message: String?) : UIEvent()
