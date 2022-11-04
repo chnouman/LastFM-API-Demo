@@ -10,4 +10,8 @@
     <string name="url">Track Url</string>
     <string name="album_image">Album Image</string>
     <string name="top_album">Top Album</string>
+    <string name="label_main_fragment">Home</string>
+    <string name="label_search_fragment">Search Artists</string>
+    <string name="label_album_detail_fragment">Album Detail</string>
+    <string name="label_tap_albums_fragment">Top Albums</string>
 </resources>
