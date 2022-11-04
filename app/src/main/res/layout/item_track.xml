@@ -18,7 +18,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="#F06292"
-            android:contentDescription="@string/trackimage"
+            android:contentDescription="@string/track_image"
             android:padding="16dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +38,8 @@
         <TextView
             android:id="@+id/durationTextView"
             android:layout_width="0dp"
-            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toStartOf="@id/urlImageView"
             app:layout_constraintStart_toEndOf="@id/trackImageView"

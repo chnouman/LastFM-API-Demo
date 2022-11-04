@@ -26,7 +26,7 @@
                 android:id="@+id/albumImageView"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:contentDescription="@string/albumimage"
+                android:contentDescription="@string/album_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

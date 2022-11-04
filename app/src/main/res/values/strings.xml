@@ -6,8 +6,8 @@
     <string name="no_result_found">No Results found</string>
     <string name="save">Save Album</string>
     <string name="delete">Delete Album</string>
-    <string name="trackimage">Track Image</string>
+    <string name="track_image">Track Image</string>
     <string name="url">Track Url</string>
-    <string name="albumimage">Album Image</string>
+    <string name="album_image">Album Image</string>
     <string name="top_album">Top Album</string>
 </resources>
