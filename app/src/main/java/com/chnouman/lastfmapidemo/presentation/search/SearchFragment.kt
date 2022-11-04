@@ -1,30 +1,27 @@
 package com.chnouman.lastfmapidemo.presentation.search
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.chnouman.lastfmapidemo.core.util.extensions.hide
 import com.chnouman.lastfmapidemo.core.util.extensions.show
 import com.chnouman.lastfmapidemo.databinding.FragmentSearchBinding
+import com.chnouman.lastfmapidemo.presentation.base.BaseFragment
 import com.chnouman.lastfmapidemo.presentation.main.paging.MainLoadStateAdapter
 import com.chnouman.lastfmapidemo.presentation.search.adapter.ArtistListAdapter
 import com.chnouman.lastfmapidemo.presentation.search.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
     private val viewModel: SearchViewModel by viewModels()
-    private var binding: FragmentSearchBinding? = null
 
     private val adapter: ArtistListAdapter by lazy {
         ArtistListAdapter {
@@ -36,48 +33,44 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.artistsRecyclerView?.adapter = adapter.withLoadStateFooter(MainLoadStateAdapter())
-        binding?.searchEditText?.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                binding?.searchButton?.performClick()
-                return@OnEditorActionListener true
+        viewDataBinding?.apply {
+            artistsRecyclerView.adapter = adapter.apply {
+                withLoadStateFooter(MainLoadStateAdapter())
+                addLoadStateListener { loadState ->
+                    manageLoadingState(loadState)
+                }
             }
-            false
-        })
-        adapter.addLoadStateListener { loadState ->
+            searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchButton.performClick()
+                    return@OnEditorActionListener true
+                }
+                false
+            })
+            searchButton.setOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.searchArtistPaged(searchEditText.text.toString())
+                        .collect { pagingData ->
+                            adapter.submitData(pagingData)
+                        }
+                }
+            }
+        }
+    }
+
+    private fun manageLoadingState(loadState: CombinedLoadStates) {
+        viewDataBinding?.apply {
             if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
-                binding?.artistsRecyclerView?.hide()
-                binding?.emptyTextView?.show()
+                artistsRecyclerView.hide()
+                emptyTextView.show()
             } else {
-                binding?.artistsRecyclerView?.show()
-                binding?.emptyTextView?.hide()
-            }
-        }
-        binding?.searchButton?.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.searchArtistPaged(binding?.searchEditText?.text.toString())
-                    .collect { pagingData ->
-                        adapter.submitData(pagingData)
-                    }
+                artistsRecyclerView.show()
+                emptyTextView.hide()
             }
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 }
 
