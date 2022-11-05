@@ -14,4 +14,9 @@
     <string name="label_search_fragment">Search Artists</string>
     <string name="label_album_detail_fragment">Album Detail</string>
     <string name="label_tap_albums_fragment">Top Albums</string>
+    <string name="dummy_track_name">Chan kitan Guzari</string>
+    <string name="dummy_album_name">Lonely Nights</string>
+    <string name="dummy_artist_name">Rizwan Ul Islam</string>
+    <string name="dummy_track_number">1</string>
+    <string name="dummy_track_duration">00:00</string>
 </resources>

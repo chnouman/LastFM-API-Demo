@@ -26,12 +26,14 @@
 
         <TextView
             android:id="@+id/artistTextView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:textColor="@android:color/holo_green_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/artistNameTextView"
+            app:layout_constraintStart_toStartOf="@id/artistNameTextView"
             app:layout_constraintTop_toBottomOf="@id/artistNameTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

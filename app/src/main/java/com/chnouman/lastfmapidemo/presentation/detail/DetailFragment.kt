@@ -61,8 +61,8 @@ class DetailFragment : BaseFragment<FragmentDetailsBinding>(FragmentDetailsBindi
                     }
                 }
             }
-            albumTextView.text = args.album.name
             artistNameTextView.text = args.album.artistName
+            albumNameTextView.text = args.album.name
             playCountTextView.text = args.album.playCount.toString()
             Glide
                 .with(requireActivity())
