@@ -1,8 +1,12 @@
 package com.chnouman.lastfmapidemo.domain.repository
 
-import com.chnouman.lastfmapidemo.core.util.Resource
-import kotlinx.coroutines.flow.Flow
+import com.chnouman.lastfmapidemo.data.remote.models.ArtistsSearchResponse
 
 interface SearchRepository {
-    suspend fun searchArtist(query: String, apiKey: String): Flow<Resource<List<com.chnouman.lastfmapidemo.data.local.entities.Artist>>>
+    suspend fun searchArtistPaged(
+        artistQuery: String,
+        apiKey: String,
+        page: Int,
+        limit: Int
+    ): ArtistsSearchResponse
 }

@@ -4,12 +4,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.chnouman.lastfmapidemo.core.util.extensions.empty
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
-import com.chnouman.lastfmapidemo.data.remote.LastFMApi
+import com.chnouman.lastfmapidemo.domain.usecases.artist.SearchArtist
 
 class LastFMPagingSource(
     private val artistQuery: String,
-    private val apiKey: String,
-    private val lastFMApi: LastFMApi
+    private val searchArtist: SearchArtist
 ) : PagingSource<Int, Artist>() {
     override fun getRefreshKey(state: PagingState<Int, Artist>): Int? {
         return null
@@ -18,7 +17,7 @@ class LastFMPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
         return try {
             val currentPage = params.key ?: 1
-            val response = lastFMApi.searchArtistPaged(artistQuery, apiKey, currentPage, 10)
+            val response = searchArtist(artistQuery, currentPage, 10)
             val data = response.results?.artistmatches?.artist
             val localArtists = data?.map {
                 Artist(
