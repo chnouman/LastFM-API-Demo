@@ -34,7 +34,7 @@
 
 
     <TextView
-        android:id="@+id/artistNameTextView"
+        android:id="@+id/artistTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_small_margin"
@@ -55,7 +55,7 @@
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/albumNameTextView"
         app:layout_constraintStart_toStartOf="@+id/albumNameTextView"
-        app:layout_constraintTop_toBottomOf="@id/artistNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/artistTextView"
         tools:text="@string/dummy_track_duration" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -63,7 +63,7 @@
         android:layout_width="@dimen/small_button_size"
         android:layout_height="@dimen/small_button_size"
         android:layout_marginTop="@dimen/extra_small_margin"
-        android:background="@drawable/delete_button"
+        android:background="@drawable/add_to_favourite_button"
         android:src="@drawable/ic_play"
         app:layout_constraintStart_toStartOf="@id/albumNameTextView"
         app:layout_constraintTop_toBottomOf="@id/playCountTextView" />
@@ -74,7 +74,7 @@
         android:layout_height="@dimen/small_button_size"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/extra_small_margin"
-        android:background="@drawable/delete_button"
+        android:background="@drawable/add_to_favourite_button"
         android:src="@drawable/ic_add"
         app:layout_constraintStart_toEndOf="@id/playButton"
         app:layout_constraintTop_toBottomOf="@id/playCountTextView" />
@@ -94,6 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/medium_margin"
+        android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

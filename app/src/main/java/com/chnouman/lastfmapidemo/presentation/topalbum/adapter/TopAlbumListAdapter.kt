@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.chnouman.lastfmapidemo.core.util.extensions.hide
-import com.chnouman.lastfmapidemo.core.util.extensions.show
+import com.bumptech.glide.Glide
+import com.chnouman.lastfmapidemo.R
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
 
@@ -19,22 +19,29 @@ class TopAlbumListAdapter(
 
     inner class AlbumViewHolder(private val binding: ItemAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(albumsDto: Album, position: Int) {
+        fun bind(album: Album, position: Int) {
             binding.apply {
-                artistTextView.text = albumsDto.name
-                nameTextView.text = albumsDto.name
-                if (albumsDto.isDownloaded) {
-                    deleteButton.show()
-                    saveButton.hide()
-                } else {
-                    deleteButton.hide()
-                    saveButton.show()
+                artistTextView.text = album.artistName
+                albumNameTextView.text = album.name
+                actionImageView.setImageResource(
+                    if (album.isDownloaded) R.drawable.ic_delete else R.drawable.ic_download
+                )
+                actionImageView.setOnClickListener {
+                    if (album.isDownloaded) {
+                        deleteItemClick.invoke(album, position)
+                    } else {
+                        saveItemClick.invoke(album, position)
+                    }
                 }
-                saveButton.setOnClickListener { saveItemClick.invoke(albumsDto, position) }
-                deleteButton.setOnClickListener { deleteItemClick.invoke(albumsDto, position) }
                 itemView.setOnClickListener {
-                    itemClick.invoke(albumsDto)
+                    itemClick.invoke(album)
                 }
+                Glide
+                    .with(albumImageView.context)
+                    .load(album.image)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(albumImageView)
             }
         }
     }
