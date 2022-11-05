@@ -44,27 +44,22 @@ class FakeTopAlbumRepository : TopAlbumRepository {
         return flowOf(Resource.Success(listOf(Track("ABC", 200, "", albumName))))
     }
 
-    override suspend fun addAlbumDto(albumsDto: Album) {
-//assumed as success
+    override suspend fun addAlbum(albumsDto: Album) {
+        // assumed as success
     }
 
     override suspend fun addTracks(tracks: List<Track>) {
-        //assumed as success
     }
 
     override suspend fun addArtist(artist: Artist) {
-        //assumed as success
     }
 
     override suspend fun deleteAlbum(albumsDto: Album) {
-        //assumed as success
     }
 
     override suspend fun deleteTracks(albumsName: String) {
-        //assumed as success
     }
 
     override suspend fun deleteArtist(artist: String) {
-        //assumed as success
     }
 }

@@ -5,6 +5,6 @@ import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
 
 class AddAlbum(private val repository: TopAlbumRepository) {
     suspend operator fun invoke(albumsDto: Album) {
-        return repository.addAlbumDto(albumsDto)
+        return repository.addAlbum(albumsDto)
     }
 }

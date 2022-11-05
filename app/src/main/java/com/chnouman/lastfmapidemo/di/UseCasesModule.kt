@@ -9,9 +9,9 @@ import com.chnouman.lastfmapidemo.domain.usecases.album.DeleteAlbum
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetLocalAlbums
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetTopAlbums
-import com.chnouman.lastfmapidemo.domain.usecases.artist.SearchArtist
 import com.chnouman.lastfmapidemo.domain.usecases.artist.AddArtist
 import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
+import com.chnouman.lastfmapidemo.domain.usecases.artist.SearchArtist
 import com.chnouman.lastfmapidemo.domain.usecases.track.AddTrack
 import com.chnouman.lastfmapidemo.domain.usecases.track.DeleteTracks
 import com.chnouman.lastfmapidemo.domain.usecases.track.GetLocalTracks
@@ -24,7 +24,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCasesModule {
-    // Start Region UseCase dependencies
     @Provides
     @Singleton
     fun provideGetAlbums(repository: MainRepository): GetLocalAlbums {
@@ -96,5 +95,4 @@ object UseCasesModule {
     fun provideDeleteArtist(repository: TopAlbumRepository): DeleteArtist {
         return DeleteArtist(repository)
     }
-    // End region UseCase dependencies
 }

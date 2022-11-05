@@ -4,11 +4,11 @@ import app.cash.turbine.test
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import com.chnouman.lastfmapidemo.data.repository.FakeTopAlbumRepository
+import com.chnouman.lastfmapidemo.domain.usecases.album.AddAlbum
 import com.chnouman.lastfmapidemo.domain.usecases.album.CompareLocalAlbums
+import com.chnouman.lastfmapidemo.domain.usecases.album.DeleteAlbum
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetTopAlbums
-import com.chnouman.lastfmapidemo.domain.usecases.album.AddAlbum
-import com.chnouman.lastfmapidemo.domain.usecases.album.DeleteAlbum
 import com.chnouman.lastfmapidemo.domain.usecases.artist.AddArtist
 import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
 import com.chnouman.lastfmapidemo.domain.usecases.track.AddTrack

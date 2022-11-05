@@ -15,7 +15,7 @@ interface TopAlbumRepository {
 
     suspend fun compareLocalAlbums(albums: List<Album>): List<Album>
     suspend fun getLocalTracks(albumName: String): Flow<Resource<List<Track>>>
-    suspend fun addAlbumDto(albumsDto: Album)
+    suspend fun addAlbum(albumsDto: Album)
     suspend fun addTracks(tracks: List<Track>)
     suspend fun addArtist(artist: com.chnouman.lastfmapidemo.data.local.entities.Artist)
     suspend fun deleteAlbum(albumsDto: Album)

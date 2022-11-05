@@ -17,7 +17,7 @@ object DataGenerator {
     }
 
     fun getArtist(name: String): Artist {
-        return Artist(name, "https://lastfm.com","250","http://lastfm.com")
+        return Artist(name, "https://lastfm.com", "250", "http://lastfm.com")
     }
 
     fun getTrack(name: String): Track {

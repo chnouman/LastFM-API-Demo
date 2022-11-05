@@ -5,16 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.chnouman.lastfmapidemo.core.util.Resource
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
-import com.chnouman.lastfmapidemo.domain.usecases.album.CompareLocalAlbums
-import com.chnouman.lastfmapidemo.domain.usecases.album.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.album.AddAlbum
+import com.chnouman.lastfmapidemo.domain.usecases.album.CompareLocalAlbums
 import com.chnouman.lastfmapidemo.domain.usecases.album.DeleteAlbum
+import com.chnouman.lastfmapidemo.domain.usecases.album.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.album.GetTopAlbums
 import com.chnouman.lastfmapidemo.domain.usecases.artist.AddArtist
 import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
 import com.chnouman.lastfmapidemo.domain.usecases.track.AddTrack
 import com.chnouman.lastfmapidemo.domain.usecases.track.DeleteTracks
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -22,7 +23,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class TopAlbumViewModel @Inject constructor(

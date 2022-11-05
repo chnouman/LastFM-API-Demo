@@ -107,7 +107,7 @@ class TopAlbumRepositoryImpl(
             }
         }
 
-    override suspend fun addAlbumDto(albumsDto: Album) = albumDao.insert(albumsDto)
+    override suspend fun addAlbum(albumsDto: Album) = albumDao.insert(albumsDto)
 
     override suspend fun addTracks(tracks: List<Track>) = trackDao.insertAll(tracks)
 
