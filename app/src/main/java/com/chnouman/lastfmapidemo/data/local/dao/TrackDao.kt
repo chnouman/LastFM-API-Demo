@@ -18,5 +18,5 @@ interface TrackDao {
     fun delete(albumName: String)
 
     @Query("Select * from tracks_table Where albumName = :albumName")
-    fun getAll(albumName:String): List<Track>
+    fun getAll(albumName: String): List<Track>
 }

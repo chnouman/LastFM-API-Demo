@@ -51,7 +51,6 @@ class ArtistListAdapter(
         getItem(position)?.let { holder.bind(it) }
     }
 
-
     class CategoryMainDiffUtils : DiffUtil.ItemCallback<Artist>() {
         override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
             return oldItem == newItem
@@ -60,6 +59,5 @@ class ArtistListAdapter(
         override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
             return oldItem.name == newItem.name
         }
-
     }
 }

@@ -8,7 +8,6 @@ import com.chnouman.lastfmapidemo.presentation.delegate.ToolbarDelegate
 import com.chnouman.lastfmapidemo.presentation.delegate.ToolbarDelegateImpl
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
     ToolbarDelegate by ToolbarDelegateImpl() {

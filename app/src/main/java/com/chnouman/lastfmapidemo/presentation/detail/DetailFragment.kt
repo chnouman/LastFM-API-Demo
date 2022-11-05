@@ -41,8 +41,8 @@ class DetailFragment : BaseFragment<FragmentDetailsBinding>(FragmentDetailsBindi
             lifecycleScope.launch {
                 viewModel.eventFlow.collectLatest { event ->
                     when (event) {
-                        is DetailViewModel.UIEvent.
-                        Loading -> {
+                        is DetailViewModel.UIEvent
+                        .Loading -> {
                             progressIndicator.show()
                         }
                         is DetailViewModel.UIEvent.Success -> {
@@ -79,4 +79,3 @@ class DetailFragment : BaseFragment<FragmentDetailsBinding>(FragmentDetailsBindi
         adapter.submitList(artists)
     }
 }
-

@@ -29,7 +29,7 @@ class LastFMPagingSource(
                 )
             }
             if (localArtists?.isEmpty() == true) {
-                LoadResult.Error(Throwable("No more items"))//TODO fix the empty list case and stop paging
+                LoadResult.Error(Throwable("No more items")) // TODO fix the empty list case and stop paging
             } else {
                 LoadResult.Page(
                     data = localArtists!!,

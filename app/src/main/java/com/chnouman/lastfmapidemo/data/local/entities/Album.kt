@@ -1,13 +1,15 @@
 package com.chnouman.lastfmapidemo.data.local.entities
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "albums_table")
 @Parcelize
-data class  Album @JvmOverloads constructor(
+data class Album @JvmOverloads constructor(
     @PrimaryKey(autoGenerate = false)
     @SerializedName("name")
     var name: String,
@@ -20,5 +22,5 @@ data class  Album @JvmOverloads constructor(
     @SerializedName("artistName")
     var artistName: String,
     @Ignore
-    var isDownloaded:Boolean = false
+    var isDownloaded: Boolean = false
 ) : Parcelable

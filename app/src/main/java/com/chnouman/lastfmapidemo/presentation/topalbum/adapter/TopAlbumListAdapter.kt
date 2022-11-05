@@ -12,7 +12,7 @@ import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
 class TopAlbumListAdapter(
     private var itemClick: (Album) -> Unit,
     private var deleteItemClick: (Album, Int) -> Unit,
-    private var saveItemClick: (Album, Int) -> Unit,
+    private var saveItemClick: (Album, Int) -> Unit
 ) : androidx.recyclerview.widget.ListAdapter<Album, TopAlbumListAdapter.AlbumViewHolder>(
     AlbumDiffUtils()
 ) {
@@ -70,4 +70,3 @@ class TopAlbumListAdapter(
         }
     }
 }
-

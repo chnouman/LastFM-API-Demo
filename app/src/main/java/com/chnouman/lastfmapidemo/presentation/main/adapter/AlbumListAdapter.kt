@@ -11,7 +11,7 @@ import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
 
 class AlbumListAdapter(
-    private var itemClick: (Album) -> Unit,
+    private var itemClick: (Album) -> Unit
 ) : PagingDataAdapter<Album, AlbumListAdapter.AlbumViewHolder>(
     AlbumDiffUtils()
 ) {
@@ -52,7 +52,6 @@ class AlbumListAdapter(
         getItem(position)?.let { holder.bind(it) }
     }
 
-
     class AlbumDiffUtils : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
             return oldItem == newItem
@@ -61,6 +60,5 @@ class AlbumListAdapter(
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
             return oldItem.name == newItem.name
         }
-
     }
 }

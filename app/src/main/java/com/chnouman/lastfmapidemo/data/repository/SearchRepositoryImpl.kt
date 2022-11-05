@@ -5,10 +5,10 @@ import com.chnouman.lastfmapidemo.core.util.extensions.empty
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
 import com.chnouman.lastfmapidemo.domain.repository.SearchRepository
+import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import java.io.IOException
 
 class SearchRepositoryImpl(private val api: LastFMApi) : SearchRepository {
     override suspend fun searchArtist(

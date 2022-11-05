@@ -103,9 +103,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                     menuItem,
                     requireView().findNavController()
                 )
-
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 }
-

@@ -7,9 +7,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.chnouman.lastfmapidemo.domain.usecases.GetLocalAlbums
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(
             pageSize = 5,
             enablePlaceholders = false,
             initialLoadSize = 5
-        ),
+        )
     ) {
         getLocalAlbums()
     }.flow.flowOn(Dispatchers.IO).cachedIn(viewModelScope)

@@ -3,7 +3,6 @@ package com.chnouman.lastfmapidemo.presentation.topalbum.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
 import com.chnouman.lastfmapidemo.core.util.Resource
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
@@ -12,13 +11,18 @@ import com.chnouman.lastfmapidemo.domain.usecases.CompareLocalAlbums
 import com.chnouman.lastfmapidemo.domain.usecases.DeleteAlbum
 import com.chnouman.lastfmapidemo.domain.usecases.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.artist.AddArtist
+import com.chnouman.lastfmapidemo.domain.usecases.artist.DeleteArtist
 import com.chnouman.lastfmapidemo.domain.usecases.track.AddTrack
 import com.chnouman.lastfmapidemo.domain.usecases.track.DeleteTracks
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class TopAlbumViewModel @Inject constructor(
@@ -30,7 +34,7 @@ class TopAlbumViewModel @Inject constructor(
     val addAlbumUseCase: AddAlbum,
     val addArtist: AddArtist,
     val deleteTracks: DeleteTracks,
-    val deleteArtist: DeleteArtist,
+    val deleteArtist: DeleteArtist
 ) : ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<UIEvent>()
@@ -67,7 +71,7 @@ class TopAlbumViewModel @Inject constructor(
 
     fun saveAlbum(position: Int, albumsDto: Album, artist: Artist) {
         viewModelScope.launch(Dispatchers.IO) {
-            //load the album detail
+            // load the album detail
             val tracks = getAlbumInfo(artist.name, albumsDto.name)
             val job1 = launch { addArtist(artist) }
             val job2 = launch { addAlbumUseCase(albumsDto) }

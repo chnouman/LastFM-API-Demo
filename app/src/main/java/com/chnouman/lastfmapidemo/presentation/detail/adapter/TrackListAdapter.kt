@@ -10,7 +10,7 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class TrackListAdapter(
-    private var urlItemClick: (Track) -> Unit,
+    private var urlItemClick: (Track) -> Unit
 ) : androidx.recyclerview.widget.ListAdapter<Track, TrackListAdapter.TrackViewHolder>(
     AlbumDiffUtils()
 ) {
@@ -41,7 +41,6 @@ class TrackListAdapter(
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(getItem(position), position)
     }
-
 
     class AlbumDiffUtils : DiffUtil.ItemCallback<Track>() {
         override fun areItemsTheSame(oldItem: Track, newItem: Track): Boolean {

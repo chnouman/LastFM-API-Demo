@@ -5,8 +5,8 @@ package com.chnouman.lastfmapidemo.data.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.DataGenerator
 import com.chnouman.lastfmapidemo.data.local.dao.TrackDao
 import com.google.common.truth.Truth.assertThat
@@ -33,7 +33,7 @@ class TrackDaoTests {
             ApplicationProvider.getApplicationContext(),
             LastFmDatabase::class.java
         ).allowMainThreadQueries().build()
-        dao = database.getTrackDao()
+        dao = database.trackDao
     }
 
     @Test
@@ -79,7 +79,6 @@ class TrackDaoTests {
         assertThat(dao.getAll("albumName").size).isEqualTo(1)
     }
 
-
     @Test
     fun deleteTrackScenarioSuccess() = runTest {
         val track = DataGenerator.getTrack("ABC")
@@ -92,7 +91,7 @@ class TrackDaoTests {
     fun deleteTrackScenarioFailure() = runTest {
         val track = DataGenerator.getTrack("ABC")
         dao.insert(track)
-        dao.delete(track.name)//Passing Wrong Name
+        dao.delete(track.name) // Passing Wrong Name
         assertThat(dao.getAll(track.albumName).size).isEqualTo(1)
         assertThat(dao.getAll(track.albumName).size).isNotEqualTo(0)
     }
@@ -109,5 +108,4 @@ class TrackDaoTests {
     fun teardown() {
         database.close()
     }
-
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="toolbar_elevation">4dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
+    <dimen name ="small_margin">8dp</dimen>
     <dimen name="small_medium_margin">12dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="extra_small_margin">4dp</dimen>

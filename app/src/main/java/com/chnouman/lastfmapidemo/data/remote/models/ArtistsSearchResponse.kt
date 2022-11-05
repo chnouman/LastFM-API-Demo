@@ -10,14 +10,12 @@ data class ArtistMatches(
     val artist: List<Artist>?
 )
 
-
 data class Artist(
     val image: List<Image>?,
     val name: String?,
     val url: String?,
     val listeners: String?
 )
-
 
 data class OpensearchQuery(
     @SerializedName("#text")

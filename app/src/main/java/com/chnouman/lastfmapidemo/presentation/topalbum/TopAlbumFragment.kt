@@ -29,10 +29,10 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
                 )
             )
         }, { album, position ->
-            //delete action
+            // delete action
             viewModel.deleteAlbum(album, position)
         }, { album, position ->
-            //save action
+            // save action
             viewModel.saveAlbum(position, album, args.artist)
         })
     }
@@ -44,8 +44,8 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
             lifecycleScope.launch {
                 viewModel.eventFlow.collectLatest { event ->
                     when (event) {
-                        is TopAlbumViewModel.UIEvent.
-                        Loading -> {
+                        is TopAlbumViewModel.UIEvent
+                        .Loading -> {
                             progressIndicator.show()
                         }
                         is TopAlbumViewModel.UIEvent.Success -> {
@@ -79,4 +79,3 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
         adapter.notifyItemChanged(position)
     }
 }
-

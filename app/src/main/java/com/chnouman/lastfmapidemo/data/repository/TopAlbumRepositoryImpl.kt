@@ -9,16 +9,16 @@ import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
 import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
+import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import java.io.IOException
 
 class TopAlbumRepositoryImpl(
     private val api: LastFMApi,
     private val albumDao: AlbumDao,
     private val trackDao: TrackDao,
-    private val artistDao: ArtistDao,
+    private val artistDao: ArtistDao
 ) :
     TopAlbumRepository {
 
@@ -56,7 +56,6 @@ class TopAlbumRepositoryImpl(
                 )
             }
         }
-
 
     override suspend fun getAlbumInfo(
         artist: String,
@@ -119,7 +118,7 @@ class TopAlbumRepositoryImpl(
     override suspend fun deleteTracks(albumsName: String) = trackDao.delete(albumsName)
 
     override suspend fun deleteArtist(artist: String) {
-        //check if record is only attached to single album then delete it otherwise keep it
+        // check if record is only attached to single album then delete it otherwise keep it
         var numberOfAlbums = 0
         albumDao.getAll().forEach {
             if (it.artistName == artist) {

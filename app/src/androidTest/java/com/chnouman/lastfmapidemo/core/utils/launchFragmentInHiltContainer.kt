@@ -10,11 +10,10 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.chnouman.lastfmapidemo.HiltTestActivity
 
-
 /**
  * launchFragmentInContainer from the androidx.fragment:fragment-testing library
  * is NOT possible to use right now as it uses a hardcoded Activity under the hood
- * (i.e. [EmptyFragmentActivity]) which is not annotated with @AndroidEntryPoint.
+ * (i.e. [Empty Fragment Activity]) which is not annotated with @AndroidEntryPoint.
  *
  * As a workaround, use this function that is equivalent. It requires you to add
  * [HiltTestActivity] in the debug folder and include it in the debug AndroidManifest.xml file
