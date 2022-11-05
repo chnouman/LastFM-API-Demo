@@ -7,6 +7,7 @@ plugins {
     id 'kotlin-kapt'
 }
 apply from: "$project.rootDir/spotless.gradle"
+apply from: "$project.rootDir/app_test_runner.gradle"
 
 android {
     namespace 'com.chnouman.lastfmapidemo'

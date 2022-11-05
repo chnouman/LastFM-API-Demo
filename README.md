@@ -20,6 +20,7 @@ tried to make sure the test is segregated, testable and easily modifiable.
 - Android MVVM (ModelView-View-Model) with Clean Architecture
 - Programing Language: Kotlin
 - Architectural Navigation Component
+- Paging 3 Library for pagination
 - Material them (Day(Light) & Night(Dark) support)
 - Network library: Retrofit + logging Interceptors
 - Kotlin Coroutines & Coroutine+live data builders
