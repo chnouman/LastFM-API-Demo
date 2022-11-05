@@ -54,7 +54,7 @@
         android:layout_margin="16dp"
         android:text="@string/no_result_found"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

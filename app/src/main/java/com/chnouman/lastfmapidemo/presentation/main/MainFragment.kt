@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -80,10 +81,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
                 loadState.refresh is LoadState.Error -> {
                     // Failed to load data in first try
+                    emptyTextView.text = (loadState.refresh as LoadState.Error).error.message
+                    emptyTextView.show()
+                    albumsRecyclerView.hide()
                 }
 
                 loadState.append is LoadState.Error -> {
                     // Failed to load data while appending to existing items
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_more_records),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import com.chnouman.lastfmapidemo.R
 import com.chnouman.lastfmapidemo.core.util.extensions.hide
 import com.chnouman.lastfmapidemo.core.util.extensions.show
 import com.chnouman.lastfmapidemo.databinding.FragmentSearchBinding
@@ -37,10 +39,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         super.onViewCreated(view, savedInstanceState)
         viewDataBinding?.apply {
             artistsRecyclerView.adapter = adapter.apply {
-                withLoadStateFooter(MainLoadStateAdapter())
                 addLoadStateListener { loadState ->
                     manageLoadingState(loadState)
                 }
+                withLoadStateFooter(MainLoadStateAdapter())
             }
             searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -81,10 +83,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
                 loadState.refresh is LoadState.Error -> {
                     // Failed to load data in first try
+                    emptyTextView.text = (loadState.refresh as LoadState.Error).error.message
+                    emptyTextView.show()
+                    artistsRecyclerView.hide()
                 }
 
                 loadState.append is LoadState.Error -> {
                     // Failed to load data while appending to existing items
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_more_records),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
