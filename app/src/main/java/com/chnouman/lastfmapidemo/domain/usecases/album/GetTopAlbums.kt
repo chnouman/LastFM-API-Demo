@@ -1,4 +1,4 @@
-package com.chnouman.lastfmapidemo.domain.usecases
+package com.chnouman.lastfmapidemo.domain.usecases.album
 
 import com.chnouman.lastfmapidemo.BuildConfig
 import com.chnouman.lastfmapidemo.core.util.Resource

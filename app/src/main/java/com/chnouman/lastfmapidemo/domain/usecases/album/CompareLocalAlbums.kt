@@ -1,4 +1,4 @@
-package com.chnouman.lastfmapidemo.domain.usecases
+package com.chnouman.lastfmapidemo.domain.usecases.album
 
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chnouman.lastfmapidemo.core.util.Resource
 import com.chnouman.lastfmapidemo.data.local.entities.Track
+import com.chnouman.lastfmapidemo.domain.usecases.album.GetAlbumInfo
 import com.chnouman.lastfmapidemo.domain.usecases.track.GetLocalTracks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getLocalTracks: GetLocalTracks,
-    private val getAlbumInfo: com.chnouman.lastfmapidemo.domain.usecases.GetAlbumInfo
+    private val getAlbumInfo: GetAlbumInfo
 ) : ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<UIEvent>()

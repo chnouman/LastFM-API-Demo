@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.chnouman.lastfmapidemo.domain.usecases.GetLocalAlbums
+import com.chnouman.lastfmapidemo.domain.usecases.album.GetLocalAlbums
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
