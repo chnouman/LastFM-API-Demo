@@ -31,13 +31,13 @@ import kotlinx.coroutines.launch
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
     private val viewModel: MainViewModel by viewModels()
     private val adapter: AlbumListAdapter by lazy {
-        AlbumListAdapter({
+        AlbumListAdapter {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailFragment(
                     it
                 )
             )
-        }, {}, {})
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
