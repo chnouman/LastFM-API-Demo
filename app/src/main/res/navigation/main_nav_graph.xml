@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph.xml"
+    android:label="@string/label_main_fragment"
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.chnouman.lastfmapidemo.presentation.main.MainFragment"
-        android:label="Home"
+        android:label="@string/label_main_fragment"
         tools:layout="@layout/fragment_main">
 
         <action
@@ -20,8 +21,8 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.chnouman.lastfmapidemo.presentation.search.SearchFragment"
-        android:label="Search Artists"
-        tools:layout="@layout/fragment_search" >
+        android:label="@string/label_search_fragment"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_topAlbumFragment"
             app:destination="@id/topAlbumFragment" />
@@ -30,7 +31,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.chnouman.lastfmapidemo.presentation.detail.DetailFragment"
-        android:label="Album Detail"
+        android:label="@string/label_album_detail_fragment"
         tools:layout="@layout/fragment_details">
         <argument
             android:name="album"
@@ -39,7 +40,7 @@
     <fragment
         android:id="@+id/topAlbumFragment"
         android:name="com.chnouman.lastfmapidemo.presentation.topalbum.TopAlbumFragment"
-        android:label="TopAlbumFragment"
+        android:label="@string/label_tap_albums_fragment"
         tools:layout="@layout/fragment_main">
         <argument
             android:name="artist"

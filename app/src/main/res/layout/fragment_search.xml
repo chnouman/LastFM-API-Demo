@@ -24,19 +24,25 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="64dp"
         android:hint="@string/search_artist"
-        android:importantForAutofill="no"
         android:imeOptions="actionSearch"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/searchButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/medium_margin"
         android:text="@string/search"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cornerRadius="@dimen/medium_margin"
+        app:icon="@drawable/ic_search"
         app:layout_constraintEnd_toEndOf="@id/searchEditText"
         app:layout_constraintStart_toStartOf="@id/searchEditText"
         app:layout_constraintTop_toBottomOf="@id/searchEditText" />
@@ -71,6 +77,7 @@
         android:id="@+id/artistsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="@dimen/medium_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

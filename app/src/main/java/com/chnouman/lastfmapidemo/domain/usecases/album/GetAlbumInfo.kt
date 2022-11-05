@@ -1,4 +1,4 @@
-package com.chnouman.lastfmapidemo.domain.usecases
+package com.chnouman.lastfmapidemo.domain.usecases.album
 
 import com.chnouman.lastfmapidemo.BuildConfig
 import com.chnouman.lastfmapidemo.core.util.Resource
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetAlbumInfo(private val repository: TopAlbumRepository) {
 
-    suspend operator fun invoke(artist: String, album: String): Flow<Resource<MutableList<Track>>> {
+    suspend operator fun invoke(artist: String, album: String): Flow<Resource<List<Track>>> {
         return repository.getAlbumInfo(artist, album, BuildConfig.API_KEY)
     }
 }

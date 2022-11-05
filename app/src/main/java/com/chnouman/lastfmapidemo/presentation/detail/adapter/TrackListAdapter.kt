@@ -6,20 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.databinding.ItemTrackBinding
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class TrackListAdapter(
-    private var urlItemClick: (Track) -> Unit,
+    private var urlItemClick: (Track) -> Unit
 ) : androidx.recyclerview.widget.ListAdapter<Track, TrackListAdapter.TrackViewHolder>(
     AlbumDiffUtils()
 ) {
 
     inner class TrackViewHolder(private val binding: ItemTrackBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(track: Track) {
-            this.apply {
-                binding.trackNameTextView.text = track.name
-                binding.durationTextView.text = track.duration.toString()
-                binding.urlImageView.setOnClickListener { urlItemClick.invoke(track) }
+        fun bind(track: Track, position: Int) {
+            binding.apply {
+                trackNumberTextView.text = position.plus(1).toString()
+                trackNameTextView.text = track.name
+                durationTextView.text =
+                    track.duration.toDuration(DurationUnit.SECONDS).toString()
+                urlImageView.setOnClickListener { urlItemClick.invoke(track) }
             }
         }
     }
@@ -35,9 +39,8 @@ class TrackListAdapter(
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
-
 
     class AlbumDiffUtils : DiffUtil.ItemCallback<Track>() {
         override fun areItemsTheSame(oldItem: Track, newItem: Track): Boolean {
@@ -49,7 +52,7 @@ class TrackListAdapter(
         }
     }
 
-    override fun submitList(list: MutableList<Track>?) {
+    override fun submitList(list: List<Track>?) {
         super.submitList(list?.let { ArrayList(it) })
     }
 }

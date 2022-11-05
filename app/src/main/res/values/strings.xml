@@ -2,12 +2,21 @@
     <string name="app_name">LastFM Api Demo</string>
     <string name="search">Search</string>
     <string name="none_of_the_album_is_stored">None of the Album is stored</string>
-    <string name="search_artist">Search Artist…</string>
+    <string name="search_artist">Enter Artist Name</string>
     <string name="no_result_found">No Results found</string>
     <string name="save">Save Album</string>
     <string name="delete">Delete Album</string>
-    <string name="trackimage">Track Image</string>
+    <string name="track_image">Track Image</string>
     <string name="url">Track Url</string>
-    <string name="albumimage">Album Image</string>
+    <string name="album_image">Album Image</string>
     <string name="top_album">Top Album</string>
+    <string name="label_main_fragment">Home</string>
+    <string name="label_search_fragment">Search Artists</string>
+    <string name="label_album_detail_fragment">Album Detail</string>
+    <string name="label_tap_albums_fragment">Top Albums</string>
+    <string name="dummy_track_name">Chan kitan Guzari</string>
+    <string name="dummy_album_name">Lonely Nights</string>
+    <string name="dummy_artist_name">Rizwan Ul Islam</string>
+    <string name="dummy_track_number">1</string>
+    <string name="dummy_track_duration">00:00</string>
 </resources>

@@ -5,8 +5,8 @@ package com.chnouman.lastfmapidemo.data.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.DataGenerator
 import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
 import com.google.common.truth.Truth.assertThat
@@ -34,11 +34,11 @@ class AlbumDaoTests {
             ApplicationProvider.getApplicationContext(),
             LastFmDatabase::class.java
         ).allowMainThreadQueries().build()
-        dao = database.getAlbumDao()
+        dao = database.albumDao
     }
 
     @Test
-    fun basicTest(){
+    fun basicTest() {
 
         assertThat(database).isNotNull()
         assertThat(dao).isNotNull()
@@ -46,10 +46,11 @@ class AlbumDaoTests {
 
     @Test
     fun insertAlbumSuccess() = runTest {
-        val album =DataGenerator.getAlbum("ABC")
+        val album = DataGenerator.getAlbum("ABC")
         dao.insert(album)
         assertThat(dao.getAll()).hasSize(1)
     }
+
     @Test
     fun insertAlbumFailure() = runTest {
         val album = DataGenerator.getAlbum("ABC")
@@ -67,7 +68,7 @@ class AlbumDaoTests {
         dao.insert(album)
         dao.insert(album)
         assertThat(dao.getAll().size).isEqualTo(1)
-     }
+    }
 
     @Test
     fun duplicateAlbumScenarioFailure() = runTest {
@@ -78,8 +79,7 @@ class AlbumDaoTests {
         assertThat(dao.getAll().size).isNotEqualTo(3)
         assertThat(dao.getAll().size).isNotEqualTo(2)
         assertThat(dao.getAll().size).isEqualTo(1)
-     }
-
+    }
 
     @Test
     fun deleteAlbumScenarioSuccess() = runTest {
@@ -87,24 +87,24 @@ class AlbumDaoTests {
         dao.insert(album)
         dao.delete(album.name)
         assertThat(dao.getAll().size).isEqualTo(0)
-     }
+    }
 
     @Test
     fun deleteAlbumScenarioFailure() = runTest {
         val album = DataGenerator.getAlbum("ABC")
         dao.insert(album)
-        dao.delete(album.artistName)//Passing Wrong Name
+        dao.delete(album.artistName) // Passing Wrong Name
         assertThat(dao.getAll().size).isEqualTo(1)
         assertThat(dao.getAll().size).isNotEqualTo(0)
-     }
+    }
 
     @Test
     fun insertAlbumAllScenarioTest() = runTest {
         val album = DataGenerator.getAlbum("ABC")
         val album2 = DataGenerator.getAlbum("ABC2")
-        dao.insertAll(mutableListOf(album,album2))
+        dao.insertAll(listOf(album, album2))
         assertThat(dao.getAll().size).isEqualTo(2)
-     }
+    }
 
     @Test
     fun isExistAlbumScenarioSuccess() = runTest {
@@ -112,7 +112,7 @@ class AlbumDaoTests {
         dao.insert(album)
         val exist = dao.isExist(album.name)
         assertThat(exist).isTrue()
-     }
+    }
 
     @Test
     fun isExistAlbumScenarioFailure() = runTest {
@@ -121,7 +121,7 @@ class AlbumDaoTests {
         dao.delete(album.name)
         val exist = dao.isExist(album.name)
         assertThat(exist).isFalse()
-     }
+    }
 
     @After
     fun teardown() {

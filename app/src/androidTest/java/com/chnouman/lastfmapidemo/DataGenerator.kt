@@ -1,9 +1,8 @@
 package com.chnouman.lastfmapidemo
 
-import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
-import kotlin.random.Random
+import com.chnouman.lastfmapidemo.data.local.entities.Track
 
 object DataGenerator {
     fun getAlbum(name: String): Album {
@@ -18,10 +17,10 @@ object DataGenerator {
     }
 
     fun getArtist(name: String): Artist {
-        return Artist(name, "https://lastfm.com")
+        return Artist(name, "https://lastfm.com", "250", "http://lastfm.com")
     }
 
     fun getTrack(name: String): Track {
-        return Track(name,0,"https://lastfm.com","albumName")
+        return Track(name, 0, "https://lastfm.com", "albumName")
     }
 }

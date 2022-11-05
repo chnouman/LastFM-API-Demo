@@ -1,4 +1,4 @@
-package com.chnouman.lastfmapidemo.domain.usecases
+package com.chnouman.lastfmapidemo.domain.usecases.album
 
 import com.chnouman.lastfmapidemo.BuildConfig
 import com.chnouman.lastfmapidemo.core.util.Resource
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 
 class GetTopAlbums(private val repository: TopAlbumRepository) {
 
-    suspend operator fun invoke(word: String): Flow<Resource<MutableList<Album>>> {
+    suspend operator fun invoke(word: String): Flow<Resource<List<Album>>> {
         return if (word.isEmpty()) {
             flow { }
         } else {

@@ -1,4 +1,4 @@
-package com.chnouman.lastfmapidemo.domain.usecases
+package com.chnouman.lastfmapidemo.domain.usecases.album
 
 import androidx.paging.PagingSource
 import com.chnouman.lastfmapidemo.data.local.entities.Album

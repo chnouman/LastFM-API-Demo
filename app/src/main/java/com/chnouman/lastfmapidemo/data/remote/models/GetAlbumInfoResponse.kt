@@ -9,10 +9,10 @@ data class Track(
     val url: String?
 )
 class Tracks(vararg track: Track) {
-    var tracks: MutableList<Track>?
+    var tracks: List<Track>?
 
     init {
-        tracks = track.toMutableList()
+        tracks = track.toList()
     }
 }
 data class AlbumObject(

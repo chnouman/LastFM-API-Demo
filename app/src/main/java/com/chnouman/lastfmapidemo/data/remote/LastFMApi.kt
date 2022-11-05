@@ -1,7 +1,7 @@
 package com.chnouman.lastfmapidemo.data.remote
 
-import com.chnouman.lastfmapidemo.data.remote.models.GetAlbumInfo
 import com.chnouman.lastfmapidemo.data.remote.models.ArtistsSearchResponse
+import com.chnouman.lastfmapidemo.data.remote.models.GetAlbumInfo
 import com.chnouman.lastfmapidemo.data.remote.models.GetTopAlbums
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -18,9 +18,8 @@ interface LastFMApi {
         @Query("artist") artistQuery: String,
         @Query("api_key") apiKey: String,
         @Query("page") page: Int,
-        @Query("limit") limit: Int,
+        @Query("limit") limit: Int
     ): ArtistsSearchResponse
-
 
     @GET("?method=artist.gettopalbums&format=json&limit=10")
     suspend fun getTopAlbums(

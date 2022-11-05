@@ -5,8 +5,8 @@ package com.chnouman.lastfmapidemo.data.local
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import androidx.test.runner.AndroidJUnit4
 import com.chnouman.lastfmapidemo.DataGenerator
 import com.chnouman.lastfmapidemo.data.local.dao.ArtistDao
 import com.google.common.truth.Truth.assertThat
@@ -33,7 +33,7 @@ class ArtistDaoTests {
             ApplicationProvider.getApplicationContext(),
             LastFmDatabase::class.java
         ).allowMainThreadQueries().build()
-        dao = database.getArtistDao()
+        dao = database.artisDao
     }
 
     @Test
@@ -64,7 +64,7 @@ class ArtistDaoTests {
     fun insertAllArtistFailure() = runTest {
         val artist = DataGenerator.getArtist("ABC")
         val artist2 = DataGenerator.getArtist("ABC")
-        //same ids
+        // same ids
         dao.insert(artist)
         dao.insert(artist2)
         dao.delete(artist.name)
@@ -76,5 +76,4 @@ class ArtistDaoTests {
     fun teardown() {
         database.close()
     }
-
 }

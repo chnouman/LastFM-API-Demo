@@ -9,23 +9,23 @@ import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import com.chnouman.lastfmapidemo.data.local.entities.Track
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
 import com.chnouman.lastfmapidemo.domain.repository.TopAlbumRepository
+import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import java.io.IOException
 
 class TopAlbumRepositoryImpl(
     private val api: LastFMApi,
     private val albumDao: AlbumDao,
     private val trackDao: TrackDao,
-    private val artistDao: ArtistDao,
+    private val artistDao: ArtistDao
 ) :
     TopAlbumRepository {
 
     override suspend fun getTopAlbums(
         query: String,
         apiKey: String
-    ): Flow<Resource<MutableList<Album>>> =
+    ): Flow<Resource<List<Album>>> =
         flow {
             emit(Resource.Loading())
             try {
@@ -38,7 +38,7 @@ class TopAlbumRepositoryImpl(
                         image = it.image?.last()?.text ?: "",
                         artistName = it.artist?.name ?: ""
                     )
-                }?.toMutableList()
+                }
                 emit(Resource.Success(albums))
             } catch (e: HttpException) {
                 emit(
@@ -57,19 +57,18 @@ class TopAlbumRepositoryImpl(
             }
         }
 
-
     override suspend fun getAlbumInfo(
         artist: String,
         album: String,
         apiKey: String
-    ): Flow<Resource<MutableList<Track>>> = flow {
+    ): Flow<Resource<List<Track>>> = flow {
         emit(Resource.Loading())
         try {
             val getAlbumInfo = api.getAlbumInfo(artist, album, apiKey)
             val tracks = getAlbumInfo.album?.tracks
             val tracksLocal = tracks?.tracks?.map {
                 Track(it.name ?: "", it.duration ?: 0, it.url ?: "", album)
-            }?.toMutableList()
+            }
             emit(Resource.Success(tracksLocal))
         } catch (e: HttpException) {
             emit(
@@ -88,7 +87,7 @@ class TopAlbumRepositoryImpl(
         }
     }
 
-    override suspend fun compareLocalAlbums(albums: MutableList<Album>): MutableList<Album> {
+    override suspend fun compareLocalAlbums(albums: List<Album>): List<Album> {
         albums.forEach {
             val exist = albumDao.isExist(it.name)
             if (exist) {
@@ -98,19 +97,19 @@ class TopAlbumRepositoryImpl(
         return albums
     }
 
-    override suspend fun getLocalTracks(albumName: String): Flow<Resource<MutableList<Track>>> =
+    override suspend fun getLocalTracks(albumName: String): Flow<Resource<List<Track>>> =
         flow {
             val tracks = trackDao.getAll(albumName)
             if (tracks.isEmpty()) {
-                emit(Resource.Success(mutableListOf()))
+                emit(Resource.Success(listOf()))
             } else {
                 emit(Resource.Success(tracks))
             }
         }
 
-    override suspend fun addAlbumDto(albumsDto: Album) = albumDao.insert(albumsDto)
+    override suspend fun addAlbum(albumsDto: Album) = albumDao.insert(albumsDto)
 
-    override suspend fun addTracks(tracks: MutableList<Track>) = trackDao.insertAll(tracks)
+    override suspend fun addTracks(tracks: List<Track>) = trackDao.insertAll(tracks)
 
     override suspend fun addArtist(artist: Artist) = artistDao.insert(artist)
 
@@ -119,7 +118,7 @@ class TopAlbumRepositoryImpl(
     override suspend fun deleteTracks(albumsName: String) = trackDao.delete(albumsName)
 
     override suspend fun deleteArtist(artist: String) {
-        //check if record is only attached to single album then delete it otherwise keep it
+        // check if record is only attached to single album then delete it otherwise keep it
         var numberOfAlbums = 0
         albumDao.getAll().forEach {
             if (it.artistName == artist) {
