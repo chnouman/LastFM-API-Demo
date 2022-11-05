@@ -1,6 +1,7 @@
 package com.chnouman.lastfmapidemo.data.repository
 
 import com.chnouman.lastfmapidemo.core.util.Resource
+import com.chnouman.lastfmapidemo.core.util.extensions.empty
 import com.chnouman.lastfmapidemo.data.local.entities.Artist
 import com.chnouman.lastfmapidemo.data.remote.LastFMApi
 import com.chnouman.lastfmapidemo.domain.repository.SearchRepository
@@ -20,7 +21,12 @@ class SearchRepositoryImpl(private val api: LastFMApi) : SearchRepository {
                 val albumsFromRemote = api.searchArtist(query, apiKey)
                 val artists = albumsFromRemote.results?.artistmatches?.artist
                 val artistsLocal = artists?.map {
-                    Artist(it.name ?: "", it.url ?: "")
+                    Artist(
+                        it.name ?: String.empty,
+                        it.url ?: String.empty,
+                        it.listeners ?: String.empty,
+                        it.image?.lastOrNull()?.text ?: String.empty
+                    )
                 }
                 if (artistsLocal.isNullOrEmpty()) {
                     emit(Resource.Error("Nothing Found"))

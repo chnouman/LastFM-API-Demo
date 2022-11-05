@@ -14,7 +14,8 @@ data class ArtistMatches(
 data class Artist(
     val image: List<Image>?,
     val name: String?,
-    val url: String?
+    val url: String?,
+    val listeners: String?
 )
 
 

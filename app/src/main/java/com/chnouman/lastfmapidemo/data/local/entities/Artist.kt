@@ -10,5 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class Artist(
     @PrimaryKey(autoGenerate = false)
     val name: String,
-    val url: String
+    val url: String,
+    val listeners: String,
+    val image: String
 ) : Parcelable

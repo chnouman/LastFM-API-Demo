@@ -43,10 +43,10 @@ class SearchViewModel @Inject constructor(
                             _eventFlow.emit(UIEvent.Success(result.data?.map {
                                 com.chnouman.lastfmapidemo.data.local.entities.Artist(
                                     it.name,
-                                    it.url
+                                    it.url, it.listeners, it.image
                                 )
                             }
-                                ))
+                            ))
                         }
                         is Resource.Error -> {
                             result.message?.let { UIEvent.Error(it) }?.let {

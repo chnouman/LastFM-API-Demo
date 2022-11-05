@@ -21,7 +21,12 @@ class LastFMPagingSource(
             val response = lastFMApi.searchArtistPaged(artistQuery, apiKey, currentPage, 10)
             val data = response.results?.artistmatches?.artist
             val localArtists = data?.map {
-                Artist(it.name ?: String.empty, it.url ?: String.empty)
+                Artist(
+                    it.name ?: String.empty,
+                    it.url ?: String.empty,
+                    it.listeners ?: String.empty,
+                    it.image?.lastOrNull()?.text ?: String.empty
+                )
             }
             if (localArtists?.isEmpty() == true) {
                 LoadResult.Error(Throwable("No more items"))//TODO fix the empty list case and stop paging
