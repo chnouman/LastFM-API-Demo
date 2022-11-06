@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 class MainActivityTest {
 
     @Test
-    fun testActivity_inView() {
+    fun verifyTitle_is_Correct() {
         ActivityScenario.launch(MainActivity::class.java)
         onView(withId(R.id.main)).check(matches(isDisplayed()))
         onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText(R.string.label_main_fragment))))
@@ -29,8 +29,9 @@ class MainActivityTest {
     }
 
     @Test
-    fun testEmptyTextDisplayed() {
+    fun verifyOptionMenu_is_Displayed() {
         ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.searchFragment)).check(matches(isDisplayed()))
         onView(withId(R.id.searchFragment)).perform(click())
     }
 }
