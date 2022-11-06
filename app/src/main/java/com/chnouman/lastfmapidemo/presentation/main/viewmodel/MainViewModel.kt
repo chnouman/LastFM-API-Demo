@@ -27,7 +27,6 @@ class MainViewModel @Inject constructor(
     val data = Pager(
         PagingConfig(
             pageSize = 5,
-            enablePlaceholders = false,
             initialLoadSize = 5
         )
     ) {
