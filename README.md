@@ -1,6 +1,7 @@
 # LastFM API Demo App
 
 #About
+
 Demo Application demonstrating usage of few of the APIs of Last.fm with MVVM and Clean Architecture. The implementation is completed by using the latest Android libraries and 
 tried to make sure the test is segregated, testable and easily modifiable.
 
@@ -14,6 +15,20 @@ tried to make sure the test is segregated, testable and easily modifiable.
 - Min API Level: 21
 - Gradle version: 7.4
 - TargetSdkVersion: 32
+
+
+# How to use
+Get latest version of Android studio and clone the repository. Further the below screenshots will be helpful for you folks.
+<p float="left">
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/1.png" width="250px" />
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/2.png" width="250px" />
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/3.png" width="250px" />
+</p>
+<p float="left">
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/4.png" width="250px" />
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/5.png" width="250px" />
+	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/6.png" width="250px" />
+</p>
 
 # Technologies stack(Features):
 
@@ -34,6 +49,12 @@ tried to make sure the test is segregated, testable and easily modifiable.
 - For Git work flow, I have used main branch as parent and then develop branch for accepting the PR.
 - Instrumental Tests for Room DB and Retrofit Client
 - Unit Tests for testing ViewModel with FakeRepository
+
+# APIs used
+
+- https://ws.audioscrobbler.com/2.0/?method=artist.search
+- https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbum
+- https://ws.audioscrobbler.com/2.0/?method=album.getinfo
 
 
 # Running Tests:
