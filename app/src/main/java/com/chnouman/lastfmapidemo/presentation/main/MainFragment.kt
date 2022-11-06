@@ -1,19 +1,11 @@
 package com.chnouman.lastfmapidemo.presentation.main
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.chnouman.lastfmapidemo.R
@@ -21,6 +13,8 @@ import com.chnouman.lastfmapidemo.core.util.extensions.hide
 import com.chnouman.lastfmapidemo.core.util.extensions.show
 import com.chnouman.lastfmapidemo.databinding.FragmentMainBinding
 import com.chnouman.lastfmapidemo.presentation.base.BaseFragment
+import com.chnouman.lastfmapidemo.presentation.delegate.OptionMenuDelegate
+import com.chnouman.lastfmapidemo.presentation.delegate.OptionMenuDelegateImpl
 import com.chnouman.lastfmapidemo.presentation.main.adapter.AlbumListAdapter
 import com.chnouman.lastfmapidemo.presentation.main.paging.MainLoadStateAdapter
 import com.chnouman.lastfmapidemo.presentation.main.viewmodel.MainViewModel
@@ -29,24 +23,26 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
+class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
+    OptionMenuDelegate by OptionMenuDelegateImpl() {
     private val viewModel: MainViewModel by viewModels()
-    private val adapter: AlbumListAdapter by lazy {
-        AlbumListAdapter {
+    private var adapter: AlbumListAdapter? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = AlbumListAdapter({
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailFragment(
                     it
                 )
             )
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupOptionMenu()
+        }, { album ->
+            viewModel.deleteAlbum(album)
+        })
+        setupOptionMenu(requireActivity(), this, viewLifecycleOwner)
         viewDataBinding?.apply {
             albumsRecyclerView.adapter =
-                adapter.apply {
+                adapter?.apply {
                     withLoadStateFooter(MainLoadStateAdapter())
                     addLoadStateListener { loadState ->
                         manageLoadingState(loadState)
@@ -55,7 +51,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
         lifecycleScope.launch {
             viewModel.data.collectLatest {
-                adapter.submitData(it)
+                adapter?.submitData(it)
             }
         }
     }
@@ -73,7 +69,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                     // Show little loading UI as we already have some items and we're loading
                 }
 
-                loadState.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1 -> {
+                loadState.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter?.itemCount!! < 1 -> {
                     // Show empty UI as there's no data available
                     albumsRecyclerView.hide()
                     emptyTextView.show()
@@ -98,21 +94,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
     }
 
-    private fun setupOptionMenu() {
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.action_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return NavigationUI.onNavDestinationSelected(
-                    menuItem,
-                    requireView().findNavController()
-                )
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    override fun onDestroyView() {
+        viewDataBinding?.albumsRecyclerView?.adapter = null
+        adapter = null
+        super.onDestroyView()
     }
 }
