@@ -9,13 +9,13 @@ import com.bumptech.glide.Glide
 import com.chnouman.lastfmapidemo.R
 import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
-import java.util.*
+import java.util.Collections
 
 private const val ARG_CHANGED = "arg.change"
 
 class TopAlbumListAdapter(
     private var itemClick: (Album) -> Unit,
-    private var action: (Int) -> Unit,
+    private var action: (Int) -> Unit
 ) : androidx.recyclerview.widget.ListAdapter<Album, TopAlbumListAdapter.AlbumViewHolder>(
     AlbumDiffUtils()
 ) {

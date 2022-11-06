@@ -47,6 +47,4 @@ class OptionMenuDelegateImpl : OptionMenuDelegate {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
-
 }

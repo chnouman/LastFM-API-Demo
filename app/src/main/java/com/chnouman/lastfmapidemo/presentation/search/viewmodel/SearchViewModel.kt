@@ -9,11 +9,11 @@ import androidx.paging.cachedIn
 import com.chnouman.lastfmapidemo.domain.usecases.artist.SearchArtist
 import com.chnouman.lastfmapidemo.presentation.search.paging.LastFMPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(

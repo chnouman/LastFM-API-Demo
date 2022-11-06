@@ -89,5 +89,4 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
         }
         viewModel.getTopAlbums(args.artist.name)
     }
-
 }
