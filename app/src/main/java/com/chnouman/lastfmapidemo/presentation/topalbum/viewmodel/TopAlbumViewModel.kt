@@ -80,8 +80,6 @@ class TopAlbumViewModel @Inject constructor(
             job1.join()
             job2.join()
             job3.join()
-
-            albumsDto.isDownloaded = true
             _eventFlow.emit(UIEvent.ItemSaved(position))
         }
     }
@@ -97,7 +95,6 @@ class TopAlbumViewModel @Inject constructor(
             }
             job1.join()
             job2.join()
-            album.isDownloaded = false
             _eventFlow.emit(UIEvent.ItemDeleted(position))
         }
     }
