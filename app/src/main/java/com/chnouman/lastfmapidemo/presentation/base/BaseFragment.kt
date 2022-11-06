@@ -7,7 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.chnouman.lastfmapidemo.core.util.Inflate
-
+/**
+ * To avoid boiler plate code, this will help inflate the UI for Fragments
+ * We will avoid adding any other functionality to these classes instead will utilise
+ * Delegates for shared functionality
+ * */
 abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflate<VB>) : Fragment() {
 
     private var _binding: ViewBinding? = null

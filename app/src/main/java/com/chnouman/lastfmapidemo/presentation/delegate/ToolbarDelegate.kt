@@ -7,6 +7,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
+/**
+ * Generic Toolbar Delegate to implement toolbar with App activities
+ * */
 interface ToolbarDelegate {
     fun setupToolbar(activity: AppCompatActivity, toolbar: Toolbar, navController: NavController)
 }

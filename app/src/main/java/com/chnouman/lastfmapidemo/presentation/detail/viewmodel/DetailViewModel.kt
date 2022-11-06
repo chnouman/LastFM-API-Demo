@@ -9,7 +9,6 @@ import com.chnouman.lastfmapidemo.domain.usecases.track.GetLocalTracks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -26,11 +25,8 @@ class DetailViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<UIEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    private var searchJob: Job? = null
-
     fun getTracks(albumName: String, artistName: String) {
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             getLocalTracks(albumName)
                 .onEach { result ->
                     when (result) {

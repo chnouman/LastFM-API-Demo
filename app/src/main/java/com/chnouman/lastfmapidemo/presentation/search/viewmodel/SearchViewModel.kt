@@ -10,15 +10,23 @@ import com.chnouman.lastfmapidemo.domain.usecases.artist.SearchArtist
 import com.chnouman.lastfmapidemo.presentation.search.paging.LastFMPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchArtist: SearchArtist
 ) : ViewModel() {
     fun searchArtistPaged(artistQuery: String): Flow<PagingData<com.chnouman.lastfmapidemo.data.local.entities.Artist>> {
-        return Pager(PagingConfig(pageSize = 1)) {
+        if (artistQuery.isEmpty()) return flow { }
+        return Pager(
+            PagingConfig(
+                pageSize = 1
+            )
+        ) {
             LastFMPagingSource(artistQuery, searchArtist)
-        }.flow.cachedIn(viewModelScope)
+        }.flow.flowOn(Dispatchers.IO).cachedIn(viewModelScope)
     }
 }

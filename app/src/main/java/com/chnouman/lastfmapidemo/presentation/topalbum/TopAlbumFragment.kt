@@ -17,6 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Populate the list of Top Albums based on user selected Artist
+ * User can save the album for later use
+ * User can delete the album if it's already stored locally
+ * */
 @AndroidEntryPoint
 class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbumsBinding::inflate) {
     private val viewModel: TopAlbumViewModel by viewModels()
@@ -28,12 +33,14 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
                     it
                 )
             )
-        }, { album, position ->
-            // delete action
-            viewModel.deleteAlbum(album, position)
-        }, { album, position ->
-            // save action
-            viewModel.saveAlbum(position, album, args.artist)
+        }, { position ->
+            adapter.currentList[position]?.apply {
+                if (isDownloaded) {
+                    viewModel.deleteAlbum(this, position)
+                } else {
+                    viewModel.saveAlbum(position, this, args.artist)
+                }
+            }
         })
     }
 
@@ -53,10 +60,19 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
                             event.artists?.let { adapter.submitList(it) }
                         }
                         is TopAlbumViewModel.UIEvent.ItemSaved -> {
-                            updateItem(event.position)
+
+                            adapter.currentList.toMutableList().apply {
+                                this[event.position] =
+                                    this[event.position].copy(isDownloaded = true)
+                                adapter.submitList(this)
+                            }
                         }
                         is TopAlbumViewModel.UIEvent.ItemDeleted -> {
-                            updateItem(event.position)
+                            adapter.currentList.toMutableList().apply {
+                                this[event.position] =
+                                    this[event.position].copy(isDownloaded = false)
+                                adapter.submitList(this)
+                            }
                         }
                         is TopAlbumViewModel.UIEvent.Error -> {
                             progressIndicator.hide()
@@ -72,10 +88,5 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
             }
         }
         viewModel.getTopAlbums(args.artist.name)
-    }
-
-    private fun updateItem(position: Int) {
-        viewDataBinding?.progressIndicator?.hide()
-        adapter.notifyItemChanged(position)
     }
 }

@@ -1,0 +1,9 @@
+task runUnitTests(dependsOn: ['test']) {
+    group = 'lastfmapidemo__unit_tests'
+    description = "Running unit tests"
+}
+
+task runInstrumentationTests(dependsOn: ['connectedAndroidTest']) {
+    group = 'lastfmapidemo_instrumentations_tests'
+    description = "Running instrumentation tests"
+}

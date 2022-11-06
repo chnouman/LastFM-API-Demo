@@ -11,7 +11,10 @@ class LastFMPagingSource(
     private val searchArtist: SearchArtist
 ) : PagingSource<Int, Artist>() {
     override fun getRefreshKey(state: PagingState<Int, Artist>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPageIndex = state.pages.indexOf(state.closestPageToPosition(anchorPosition))
+            state.pages.getOrNull(anchorPageIndex + 1)?.prevKey ?: state.pages.getOrNull(anchorPageIndex - 1)?.nextKey
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
@@ -28,7 +31,7 @@ class LastFMPagingSource(
                 )
             }
             if (localArtists?.isEmpty() == true) {
-                LoadResult.Error(Throwable("No more items")) // TODO fix the empty list case and stop paging
+                LoadResult.Error(Throwable("No match found"))
             } else {
                 LoadResult.Page(
                     data = localArtists!!,

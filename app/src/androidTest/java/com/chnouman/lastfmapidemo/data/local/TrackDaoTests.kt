@@ -1,4 +1,3 @@
-@file:OptIn(ExperimentalCoroutinesApi::class)
 
 package com.chnouman.lastfmapidemo.data.local
 
@@ -18,6 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class TrackDaoTests {

@@ -51,8 +51,4 @@ class TrackListAdapter(
             return oldItem == newItem
         }
     }
-
-    override fun submitList(list: List<Track>?) {
-        super.submitList(list?.let { ArrayList(it) })
-    }
 }

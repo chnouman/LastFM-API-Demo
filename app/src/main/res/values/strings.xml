@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LastFM Api Demo</string>
+    <string name="app_name">LastFM App</string>
     <string name="search">Search</string>
     <string name="none_of_the_album_is_stored">None of the Album is stored</string>
     <string name="search_artist">Enter Artist Name</string>
@@ -19,4 +19,6 @@
     <string name="dummy_artist_name">Rizwan Ul Islam</string>
     <string name="dummy_track_number">1</string>
     <string name="dummy_track_duration">00:00</string>
+    <string name="no_more_records">No more records</string>
+    <string name="error_colon">\"Error: \"</string>
 </resources>
