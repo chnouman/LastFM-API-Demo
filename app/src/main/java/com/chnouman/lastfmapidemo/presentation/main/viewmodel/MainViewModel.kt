@@ -36,15 +36,13 @@ class MainViewModel @Inject constructor(
 
     fun deleteAlbum(album: Album) {
         viewModelScope.launch(Dispatchers.IO) {
-            val job1 = launch {
+            launch {
                 deleteTracks(album.name)
             }
-            val job2 = launch {
+            launch {
                 deleteAlbumUseCase(album)
                 deleteArtist(album.artistName)
             }
-            job1.join()
-            job2.join()
         }
     }
 }

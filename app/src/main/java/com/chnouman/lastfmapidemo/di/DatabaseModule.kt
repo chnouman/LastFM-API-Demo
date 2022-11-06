@@ -2,7 +2,6 @@ package com.chnouman.lastfmapidemo.di
 
 import android.app.Application
 import androidx.room.Room
-import com.chnouman.lastfmapidemo.core.util.Constants
 import com.chnouman.lastfmapidemo.data.local.LastFmDatabase
 import com.chnouman.lastfmapidemo.data.local.dao.AlbumDao
 import com.chnouman.lastfmapidemo.data.local.dao.ArtistDao
@@ -38,7 +37,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(application: Application): LastFmDatabase {
-        return Room.databaseBuilder(application, LastFmDatabase::class.java, Constants.DB_NAME)
+        return Room.databaseBuilder(application, LastFmDatabase::class.java, DB_NAME)
             .build()
     }
+
+    private const val DB_NAME = "lastfm_db"
 }

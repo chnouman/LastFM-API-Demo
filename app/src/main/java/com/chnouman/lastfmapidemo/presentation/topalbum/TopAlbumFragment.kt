@@ -17,6 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Populate the list of Top Albums based on user selected Artist
+ * User can save the album for later use
+ * User can delete the album if it's already stored locally
+ * */
 @AndroidEntryPoint
 class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbumsBinding::inflate) {
     private val viewModel: TopAlbumViewModel by viewModels()

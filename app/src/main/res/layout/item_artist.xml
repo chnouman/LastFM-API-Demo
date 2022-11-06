@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
@@ -17,8 +18,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@null"
-        app:shapeAppearanceOverlay="@style/roundedImageView" />
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        app:strokeColor="@null" />
 
     <TextView
         android:id="@+id/artistNameTextView"
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/artistImageView"
         app:layout_constraintTop_toTopOf="@id/artistImageView"
-        app:layout_constraintVertical_bias=".2" />
+        app:layout_constraintVertical_bias=".2"
+        tools:text="@string/dummy_artist_name" />
 
     <TextView
         android:id="@+id/listenersTextView"
@@ -48,5 +50,6 @@
         app:layout_constraintEnd_toEndOf="@id/artistNameTextView"
         app:layout_constraintStart_toStartOf="@id/artistNameTextView"
         app:layout_constraintTop_toBottomOf="@id/artistNameTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/dummy_track_duration" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,11 +55,11 @@ class AlbumListAdapter(
 
     class AlbumDiffUtils : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem == newItem
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem == newItem
         }
     }
 }

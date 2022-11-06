@@ -21,6 +21,10 @@ import com.chnouman.lastfmapidemo.presentation.search.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+/**
+ * Populate the list of artists based on user query
+ * List will provide pagination support also
+ * */
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
     private val viewModel: SearchViewModel by viewModels()
@@ -38,12 +42,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewDataBinding?.apply {
-            artistsRecyclerView.adapter = adapter.apply {
-                addLoadStateListener { loadState ->
-                    manageLoadingState(loadState)
-                }
-                withLoadStateFooter(MainLoadStateAdapter())
-            }
+            adapter.addLoadStateListener { loadState -> manageLoadingState(loadState) }
+            artistsRecyclerView.adapter =
+                adapter.withLoadStateFooter(MainLoadStateAdapter())
             searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     searchButton.performClick()

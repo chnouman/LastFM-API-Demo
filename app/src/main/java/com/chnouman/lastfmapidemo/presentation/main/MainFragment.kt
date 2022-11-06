@@ -22,6 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Populate the locally stored albums with pagination support
+ * Also user can tap on delete button to delete the specific album
+ * */
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
     OptionMenuDelegate by OptionMenuDelegateImpl() {
@@ -41,16 +45,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         })
         setupOptionMenu(requireActivity(), this, viewLifecycleOwner)
         viewDataBinding?.apply {
-            albumsRecyclerView.adapter =
-                adapter?.apply {
-                    withLoadStateFooter(MainLoadStateAdapter())
-                    addLoadStateListener { loadState ->
-                        manageLoadingState(loadState)
-                    }
-                }
+            adapter?.addLoadStateListener { loadState ->
+                manageLoadingState(loadState)
+            }
+            albumsRecyclerView.adapter = adapter?.withLoadStateFooter(MainLoadStateAdapter())
         }
         lifecycleScope.launch {
             viewModel.data.collectLatest {
+                viewDataBinding?.progressIndicator?.hide()
                 adapter?.submitData(it)
             }
         }

@@ -13,6 +13,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.chnouman.lastfmapidemo.R
 
+/**
+ * Delegate to inflate optionMenu items for Fragments,
+ * later modify and send menu items on the go
+ * */
 interface OptionMenuDelegate {
     fun setupOptionMenu(
         activity: FragmentActivity,

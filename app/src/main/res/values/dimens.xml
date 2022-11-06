@@ -6,9 +6,12 @@
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="extra_small_margin">4dp</dimen>
     <dimen name="medium_text_size">14sp</dimen>
+    <dimen name="double_medium_text_size">32dp</dimen>
     <dimen name="big_text_size">16sp</dimen>
     <dimen name="album_image_size">120dp</dimen>
     <dimen name="small_button_size">32dp</dimen>
+    <dimen name="medium_button_size">48dp</dimen>
     <dimen name="album_image_size_small">64dp</dimen>
     <dimen name="view_rounded_corners">8dp</dimen>
+    <dimen name="large_margin">64dp</dimen>
 </resources>

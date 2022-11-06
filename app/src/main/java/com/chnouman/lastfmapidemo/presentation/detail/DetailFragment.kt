@@ -22,6 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Populate the details of album with it's Artist and Track details
+ * */
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailsBinding>(FragmentDetailsBinding::inflate) {
     private val viewModel by viewModels<DetailViewModel>()

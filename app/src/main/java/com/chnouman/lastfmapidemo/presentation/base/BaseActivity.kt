@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.chnouman.lastfmapidemo.core.util.Inflate
-
+/**
+ * To avoid boiler plate code, this will help inflate the UI for Activities
+ * We will avoid adding any other functionality to these classes instead will utilise
+ * Delegates for shared functionality
+ * */
 abstract class BaseActivity<VB : ViewBinding>(private val inflate: Inflate<VB>) :
     AppCompatActivity() {
 

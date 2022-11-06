@@ -21,7 +21,11 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
     fun searchArtistPaged(artistQuery: String): Flow<PagingData<com.chnouman.lastfmapidemo.data.local.entities.Artist>> {
         if (artistQuery.isEmpty()) return flow { }
-        return Pager(PagingConfig(pageSize = 1)) {
+        return Pager(
+            PagingConfig(
+                pageSize = 1
+            )
+        ) {
             LastFMPagingSource(artistQuery, searchArtist)
         }.flow.flowOn(Dispatchers.IO).cachedIn(viewModelScope)
     }
