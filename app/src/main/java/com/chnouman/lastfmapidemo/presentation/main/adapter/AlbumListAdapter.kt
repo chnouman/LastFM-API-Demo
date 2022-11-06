@@ -11,7 +11,8 @@ import com.chnouman.lastfmapidemo.data.local.entities.Album
 import com.chnouman.lastfmapidemo.databinding.ItemAlbumBinding
 
 class AlbumListAdapter(
-    private var itemClick: (Album) -> Unit
+    private var itemClick: (Album) -> Unit,
+    private var action: (Album) -> Unit
 ) : PagingDataAdapter<Album, AlbumListAdapter.AlbumViewHolder>(
     AlbumDiffUtils()
 ) {
@@ -23,7 +24,7 @@ class AlbumListAdapter(
                 binding.apply {
                     artistTextView.text = album.artistName
                     albumNameTextView.text = album.name
-                    actionImageView.setOnClickListener { itemClick.invoke(album) }
+                    actionImageView.setOnClickListener { action.invoke(album) }
                     itemView.setOnClickListener {
                         itemClick.invoke(album)
                     }
