@@ -20,14 +20,14 @@ tried to make sure the test is segregated, testable and easily modifiable.
 # How to use
 Get latest version of Android studio and clone the repository. Further the below screenshots will be helpful for you folks.
 <p float="left">
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/1.png" width="250px" />
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/2.png" width="250px" />
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/3.png" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/1.jpg" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/2.jpg" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/3.jpg" width="250px" />
 </p>
 <p float="left">
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/4.png" width="250px" />
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/5.png" width="250px" />
-	<img src="https://raw.githubusercontent.com/chnouman/LastFM-API-Demo/master/art/6.png" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/4.jpg" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/5.jpg" width="250px" />
+	<img src="https://github.com/chnouman/LastFM-API-Demo/blob/main/art/6.jpg" width="250px" />
 </p>
 
 # Technologies stack(Features):
