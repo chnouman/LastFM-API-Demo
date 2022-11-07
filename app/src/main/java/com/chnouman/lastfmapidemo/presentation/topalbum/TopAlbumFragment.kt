@@ -7,8 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.chnouman.lastfmapidemo.core.util.extensions.hide
-import com.chnouman.lastfmapidemo.core.util.extensions.show
 import com.chnouman.lastfmapidemo.databinding.FragmentTopalbumsBinding
 import com.chnouman.lastfmapidemo.presentation.base.BaseFragment
 import com.chnouman.lastfmapidemo.presentation.topalbum.adapter.TopAlbumListAdapter
@@ -53,10 +51,8 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
                     when (event) {
                         is TopAlbumViewModel.UIEvent
                         .Loading -> {
-                            progressIndicator.show()
                         }
                         is TopAlbumViewModel.UIEvent.Success -> {
-                            progressIndicator.hide()
                             event.artists?.let { adapter.submitList(it) }
                         }
                         is TopAlbumViewModel.UIEvent.ItemSaved -> {
@@ -75,7 +71,6 @@ class TopAlbumFragment : BaseFragment<FragmentTopalbumsBinding>(FragmentTopalbum
                             }
                         }
                         is TopAlbumViewModel.UIEvent.Error -> {
-                            progressIndicator.hide()
                             Toast.makeText(
                                 requireContext(),
                                 "error: ${event.message}",
