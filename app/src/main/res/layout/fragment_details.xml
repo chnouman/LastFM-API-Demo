@@ -7,14 +7,16 @@
     tools:context="com.chnouman.lastfmapidemo.presentation.detail.DetailFragment">
 
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/albumImageView"
         android:layout_width="@dimen/album_image_size"
         android:layout_height="@dimen/album_image_size"
         android:layout_margin="@dimen/medium_margin"
         android:contentDescription="@string/album_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        app:strokeColor="@null" />
 
     <TextView
         android:id="@+id/albumNameTextView"
