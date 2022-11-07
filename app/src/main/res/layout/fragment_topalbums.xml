@@ -6,23 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainFragment">
 
-    <ProgressBar
-        android:id="@+id/progressIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/emptyTextView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:gravity="center"
         android:text="@string/none_of_the_album_is_stored"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         android:visibility="gone"

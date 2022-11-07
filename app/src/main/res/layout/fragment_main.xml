@@ -18,13 +18,13 @@
 
     <TextView
         android:id="@+id/emptyTextView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
         android:text="@string/none_of_the_album_is_stored"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
+        android:gravity="center"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
